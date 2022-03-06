@@ -1,6 +1,6 @@
 # Boot2Now: Minimal Bootstrapping
 
-Minimized bootstrapping of foundational software is a process to construct and a bootstrap process for building software tools progressively, from the smallest and simplest possible binary tool and source language up to a full linux development environment with gcc.
+Minimized bootstrapping of foundational software is a process for building software tools progressively, from a primitive compiler tool and source language up to a full linux development environment with gcc.
 
 At each stage of development, the tool should build a more capable version of itself using only source code input. Then the new version should be able to handle more sophisticated source code for the next phase.
 
