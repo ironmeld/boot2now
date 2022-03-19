@@ -14,7 +14,7 @@ The most evolved (and only) compiler in this project is [Builder-Hex0](https://g
 
 ## Why?
 
-I would like to take a different approach from the existing projects. It is worth noting that there are not that many projects that are active and I am not sure any of them are complete. In other words, the field is not crowded with viable solutions.
+I would like to take a different approach from the [existing projects](#existing-projects). It is worth noting that there are not that many projects that are active and I am not sure any of them are complete. In other words, the field is not crowded with viable solutions.
 
 Two of the bootstrap projects (Guix and live-bootstrap) I looked required a prebuilt linux kernel. The presumption appears to be that you cannot practically build a kernel without a subset of a POSIX kernel (or equivalent) that can execute a binary and handle commands to read from and write to a drive. These projects eventually build and transition to a kernel with that level of functionality but, in the mean time, they do not try to get there "by hand", i.e. without a POSIX kernel.
 
@@ -74,19 +74,6 @@ Building tccboot is still a bootstrapping challenge but once there, this project
 
 Starts with a tiny monitor that allow entering octal.
 
-## Levels of Trust
-
-The strictness of your bootstrapping strategy stems from the amount of trust you are willing to accept.
-
-I should note that if you just want to build your current development environment entirely from source, that is a much simpler problem and is largely solved. But you will have to start by trusting some existing set of development tools. See the Linux from Scratch project.
-
-If your motivation is to minimize trusting stuff you have not built yourself, you should know that current boostrapping techniques require trusting vast oceans of source code spanning multiple versions of tools going back many decades. You may build it yourself, but it will be impractical to read it yourself. Ultimately, you will have to trust the source code being provided.
-
-Moreover, you will need to use some existing tools to prepare inputs to the initial machine you will use. The hardware environment that this project targets (a PC) does not come with a standard human user interface for inputing the initial software directly. The BIOS reads a boot program from a well known location on a disc. Therefore, you MUST use existing tools to prepare that initial drive image. Explaining how to do that is therefore, by definition, beyond the scope of this project because we can only specify trusted tools as inputs to each phase. (One might think creating a console monitor and typing in hex code is better, but you still have to prepare a disk image with the monitor.)
-
-From a practical perspective, the lack of a built-in user interface on old hardware means this project is not sufficient to bootstrap old hardware. A bare metal machine with a blank hard drive will not be salvageable unless you can move that hard drive to another operating machine from the same era that can write an initial boot image for that hard drive, and then move it back.
-
-What I am getting at is that this project is neither practical nor pure in its principles. So be forewarned, the solution here may not be that satisfying for those reasons. I *personally* think it would be more satisfying than prior efforts and I am also motivated by the curiosity and the challenge. It remains to be seen whether that will be enough to sustain this project.
 
 ## Requirements
 
@@ -153,14 +140,30 @@ Each builder in the Build2Now series defines:
    * Instructions on how to extract output - what is the length?
 
 
-### Reference
+## Levels of Trust
+
+The strictness of your bootstrapping strategy stems from the amount of trust you are willing to accept.
+
+I should note that if you just want to build your current development environment entirely from source, that is a much simpler problem and is largely solved. But you will have to start by trusting some existing set of development tools. See the Linux from Scratch project.
+
+If your motivation is to minimize trusting stuff you have not built yourself, you should know that current boostrapping techniques require trusting vast oceans of source code spanning multiple versions of tools going back many decades. You may build it yourself, but it will be impractical to read it yourself. Ultimately, you will have to trust the source code being provided.
+
+Moreover, you will need to use some existing tools to prepare inputs to the initial machine you will use. The hardware environment that this project targets (a PC) does not come with a standard human user interface for inputing the initial software directly. The BIOS reads a boot program from a well known location on a disc. Therefore, you MUST use existing tools to prepare that initial drive image. Explaining how to do that is therefore, by definition, beyond the scope of this project because we can only specify trusted tools as inputs to each phase. (One might think creating a console monitor and typing in hex code is better, but you still have to prepare a disk image with the monitor.)
+
+From a practical perspective, the lack of a built-in user interface on old hardware means this project is not sufficient to bootstrap old hardware. A bare metal machine with a blank hard drive will not be salvageable unless you can move that hard drive to another operating machine from the same era that can write an initial boot image for that hard drive, and then move it back.
+
+What I am getting at is that this project is neither practical nor pure in its principles. So be forewarned, the solution here may not be that satisfying for those reasons. I *personally* think it would be more satisfying than prior efforts and I am also motivated by the curiosity and the challenge. It remains to be seen whether that will be enough to sustain this project.
+
+## Reference
 
 linux .02 was the first runnable version and required gcc 1.40 and minix:
 * https://www.cs.cmu.edu/~awb/linux.history.html
+* http://oldlinux.org/
 * https://virtuallyfun.com/wordpress/2010/08/13/linux-0-00-0-11-on-qemu/
 
 Linux source:
 * https://elixir.bootlin.com/linux/0.10/source
+* http://www.oldlinux.org/Linux.old/
 
 PC source:
 * https://tldp.org/HOWTO/Large-Disk-HOWTO-4.html
@@ -168,6 +171,8 @@ PC source:
 Compiler:
 * https://miyuki.github.io/2017/10/04/gcc-archaeology-1.html
 * http://download.savannah.gnu.org/releases/tinycc/
+* https://bootstrapping.miraheze.org/wiki/C_compilers
+* https://github.com/oriansj/mes-m2
 
 Like Linux from scratch
 * https://buildroot.uclibc.org/
