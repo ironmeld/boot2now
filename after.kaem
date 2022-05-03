@@ -1,0 +1,5 @@
+M2LIBC_PATH=./M2libc
+PATH=./x86/bin
+
+M2-Mesoplanet --architecture x86 -f ./helloworld.c -o ./helloworld
+./helloworld

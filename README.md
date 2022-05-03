@@ -1,4 +1,9 @@
-# Boot2Now: Minimal Bootstrapping
+# Boot2Now
+
+This project combines the [Builder-Hex0](https://github.com/ironmeld/builder-hex0) bootstrap kernel with the bootstrap compilers from the [stage0-posix](https://github.com/oriansj/stage0-posix) project in order to bootstrap a C compiler *entirely* from hex files.
+
+
+# Minimal Bootstrapping
 
 Minimized bootstrapping of foundational software is a process for building software tools progressively, from a primitive compiler tool and source language up to a full linux development environment with gcc.
 
@@ -8,19 +13,17 @@ Bootstrapping serves to isolate all inputs and outputs in the construction of so
 
 ## Status
 
-The project began in late February, 2022 and, currently, is in the very early stages.
+The most evolved (and only) kernel plus compiler in this project is [Builder-Hex0](https://github.com/ironmeld/builder-hex0). A snapshot copy is included in the builder-hex0 subdirectory.
 
-The most evolved (and only) compiler in this project is [Builder-Hex0](https://github.com/ironmeld/builder-hex0).
+The builder builds source from the [stage0-posix](https://github.com/oriansj/stage0-posix) project, a partial snapshot of which is included in the stage0-posix subdirectory.
 
 ## Why?
 
-I would like to take a different approach from the [existing projects](#existing-projects). It is worth noting that there are not that many projects that are active and I am not sure any of them are complete. In other words, the field is not crowded with viable solutions.
-
-Two of the bootstrap projects (Guix and live-bootstrap) I looked required a prebuilt linux kernel. The presumption appears to be that you cannot practically build a kernel without a subset of a POSIX kernel (or equivalent) that can execute a binary and handle commands to read from and write to a drive. These projects eventually build and transition to a kernel with that level of functionality but, in the mean time, they do not try to get there "by hand", i.e. without a POSIX kernel.
+This project is intends to compliment [existing bootstrap projects](#existing-projects) by providing a missing piece: a bootstrap kernel. Two of the bootstrap projects (Guix and live-bootstrap) I looked required a prebuilt POSIX kernel.
 
 A typical C compiler needs to read source files and system headers and it uses kernel system calls to perform file I/O. However, a POSIX kernel is typically built with a C compiler. So, we have a chicken-or-the-egg question. Indeed, when Linus Torvalds released Linux 0.02 he was using minix to compile it. Linux was not self-hostable until version .11.
 
-Nevertheless, I believe it is worth trying to build the operating system progressively in lock-step with the tool chain.
+I believe a proper approach is to build the operating system progressively in lock-step with the tool chain.
 
 My goal is to minimize the (Effort to Understand Source * Volume of Source) while maximizing progress towards a linux distro.
 
@@ -116,15 +119,14 @@ The notation build-image() means we invoke the build by booting the image. Initi
 * The first working system is launched from a "hand built" bootable image.
 
 * Every transition should preserve a bootable software environment which is checksumed and cryptographically signed. These are the Master Bootstrap Images.
-  * capture image
   * launch
   * build
-  * shutdown
-  * capture image
+  * reboot
+  * capture resulting image
 
 ## Build2Now Structure
 
-A Build2Now compiler includes:
+A Build2Now compiler should include:
    * a bootable image of the compiler
    * sha256 checksum of the compiler image
    * sha256 checksum of (parent) image that compiled the compiler
@@ -142,17 +144,8 @@ Each builder in the Build2Now series defines:
 
 ## Levels of Trust
 
-The strictness of your bootstrapping strategy stems from the amount of trust you are willing to accept.
+The strictness of your bootstrapping strategy stems from the amount of trust you are willing to accept. See TRUST.md for more information.
 
-I should note that if you just want to build your current development environment entirely from source, that is a much simpler problem and is largely solved. But you will have to start by trusting some existing set of development tools. See the Linux from Scratch project.
-
-If your motivation is to minimize trusting stuff you have not built yourself, you should know that current boostrapping techniques require trusting vast oceans of source code spanning multiple versions of tools going back many decades. You may build it yourself, but it will be impractical to read it yourself. Ultimately, you will have to trust the source code being provided.
-
-Moreover, you will need to use some existing tools to prepare inputs to the initial machine you will use. The hardware environment that this project targets (a PC) does not come with a standard human user interface for inputing the initial software directly. The BIOS reads a boot program from a well known location on a disc. Therefore, you MUST use existing tools to prepare that initial drive image. Explaining how to do that is therefore, by definition, beyond the scope of this project because we can only specify trusted tools as inputs to each phase. (One might think creating a console monitor and typing in hex code is better, but you still have to prepare a disk image with the monitor.)
-
-From a practical perspective, the lack of a built-in user interface on old hardware means this project is not sufficient to bootstrap old hardware. A bare metal machine with a blank hard drive will not be salvageable unless you can move that hard drive to another operating machine from the same era that can write an initial boot image for that hard drive, and then move it back.
-
-What I am getting at is that this project is neither practical nor pure in its principles. So be forewarned, the solution here may not be that satisfying for those reasons. I *personally* think it would be more satisfying than prior efforts and I am also motivated by the curiosity and the challenge. It remains to be seen whether that will be enough to sustain this project.
 
 ## Reference
 

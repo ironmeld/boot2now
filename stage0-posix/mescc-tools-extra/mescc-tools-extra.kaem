@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+## Copyright (C) 2017 Jeremiah Orians
+## This file is part of mescc-tools.
+##
+## mescc-tools is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## mescc-tools is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with mescc-tools.  If not, see <http://www.gnu.org/licenses/>.
+
+## You need to set the following environmental variables to build the programs:
+## ARCH="${ARCH:-x86}"
+## M2LIBC="${M2libc:-./M2libc}"
+## TOOLS="${TOOLS:-../bin}"
+## BLOOD_FLAG="${BLOOD_FLAG:-}"
+## BASE_ADDRESS="${BASE_ADDRESS:-0x08048000}"
+## BINDIR="${BINDIR:-../bin}"
+## BUILDDIR="${BUILDDIR:-}"
+
+set -ex
+
+M2LIBC_PATH=${M2LIBC}
+PATH=${BINDIR}
+
+alias CC="${TOOLS}/M2-Mesoplanet --architecture ${ARCH} -f"
+
+CC sha256sum.c -o ${BINDIR}/sha256sum
+CC match.c -o ${BINDIR}/match
+CC mkdir.c -o ${BINDIR}/mkdir
+CC untar.c -o ${BINDIR}/untar
+CC ungz.c -o ${BINDIR}/ungz
+CC catm.c -o ${BINDIR}/catm
+CC cp.c -o ${BINDIR}/cp
+CC chmod.c -o ${BINDIR}/chmod
