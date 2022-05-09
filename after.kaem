@@ -3,3 +3,6 @@ PATH=./x86/bin
 
 M2-Mesoplanet --architecture x86 -f ./helloworld.c -o ./helloworld
 ./helloworld
+
+# make helloworld the build artifact
+catm /dev/hda ./helloworld

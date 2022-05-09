@@ -3,5 +3,5 @@
 
 int main(int argc, char **argv)
 {
-    fputs("Hello World!", stdout);
+    fputs("Hello World!\n", stdout);
 }

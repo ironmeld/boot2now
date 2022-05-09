@@ -2,7 +2,6 @@
 
 This project combines the [Builder-Hex0](https://github.com/ironmeld/builder-hex0) bootstrap kernel with the bootstrap compilers from the [stage0-posix](https://github.com/oriansj/stage0-posix) project in order to bootstrap a C compiler *entirely* from hex files.
 
-
 # Minimal Bootstrapping
 
 Minimized bootstrapping of foundational software is a process for building software tools progressively, from a primitive compiler tool and source language up to a full linux development environment with gcc.
@@ -13,9 +12,15 @@ Bootstrapping serves to isolate all inputs and outputs in the construction of so
 
 ## Status
 
-The most evolved (and only) kernel plus compiler in this project is [Builder-Hex0](https://github.com/ironmeld/builder-hex0). A snapshot copy is included in the builder-hex0 subdirectory.
+The most kernel in this project is from [builder-hex0](https://github.com/ironmeld/builder-hex0). A snapshot copy of that project is included in the builder-hex0 subdirectory.
 
-The builder builds source from the [stage0-posix](https://github.com/oriansj/stage0-posix) project, a partial snapshot of which is included in the stage0-posix subdirectory.
+The size of the initial boot sector seed is only 384 bytes of binary code. See builder-hex0/builder-hex0-mini.hex0 for the hex source code.
+
+The "mini" builder is used to build a 3K minimal posix kernel (also in the form of a disk boot image), which is called the "full" builder. See builder-hex0/builder-hex0.hex0 for the hex source code.
+
+The full builder is purpose-built to build the x86 source from the [stage0-posix](https://github.com/oriansj/stage0-posix) project, a partial snapshot of which is included in the stage0-posix subdirectory. This results in a C like compiler called M2-Mesoplanet which can then be used to compile C like programs.
+
+To be clear, "purpose-built" means it contains several "hacks" which minimally supports building stage0-posix but it should not be considered posix compliant otherwise.
 
 ## Why?
 
@@ -27,7 +32,7 @@ I believe a proper approach is to build the operating system progressively in lo
 
 My goal is to minimize the (Effort to Understand Source * Volume of Source) while maximizing progress towards a linux distro.
 
-Another difference with other projects is the method of input. The amount of code to be compiled to reach a modern toolchain with gcc is enormous. It cannot be typed in. We must present it to the machine via hardware. Possible solutions include interfacting with network interfaces, serial ports, and hard drives. A hard drives make the most sense to me. Other projects are focused on network access, the console, or serial ports.
+Another difference with other projects is the method of input. The amount of code to be compiled to reach a modern toolchain with gcc is enormous. It is not practical to type the code in with a keyboard. We must present it to the machine via hardware. Possible solutions include interfacting with network interfaces, serial ports, and hard drives. A hard drives make the most sense to me. Other projects are focused on network access, the console, or serial ports.
 
 
 ## Existing Projects
