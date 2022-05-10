@@ -18,20 +18,21 @@
  */
 
 #include"cc.h"
+#include <unistd.h>
 
 /* The core functions */
 void populate_env(char** envp);
 void setup_env();
 char* env_lookup(char* variable);
 void initialize_types();
-struct token_list* read_all_tokens(FILE* a, struct token_list* current, char* filename);
+struct token_list* read_all_tokens(FILE* a, struct token_list* current, char* filename, int include);
 struct token_list* reverse_list(struct token_list* head);
 
 void init_macro_env(char* sym, char* value, char* source, int num);
 void preprocess();
 void output_tokens(struct token_list *i, FILE* out);
 int strtoint(char *a);
-void spawn_processes(int debug_flag, char* preprocessed_file, char* destination, char** envp);
+void spawn_processes(int debug_flag, char* prefix, char* preprocessed_file, char* destination, char** envp);
 
 void prechecks(int argc, char** argv)
 {
@@ -82,7 +83,7 @@ void prechecks(int argc, char** argv)
 			if(1 <= DEBUG_LEVEL)
 			{
 				fputs("M2LIBC_PATH set by -I to ", stderr);
-				fputs(M2LIBC_PATH, stderr);
+				fputs(hold, stderr);
 				fputc('\n', stderr);
 			}
 			M2LIBC_PATH = hold;
@@ -121,6 +122,7 @@ int main(int argc, char** argv, char** envp)
 	FILE* destination_file = stdout;
 	char* name;
 	int DUMP_MODE = FALSE;
+	int follow_includes = TRUE;
 
 	/* Try to get our needed updates */
 	prechecks(argc, argv);
@@ -137,6 +139,15 @@ int main(int argc, char** argv, char** envp)
 	{
 		fputs("M2LIBC_PATH set by environment variable to ", stderr);
 		fputs(M2LIBC_PATH, stderr);
+		fputc('\n', stderr);
+	}
+
+	TEMPDIR = env_lookup("TMPDIR");
+	if(NULL == TEMPDIR) TEMPDIR = "/tmp";
+	else if(1 <= DEBUG_LEVEL)
+	{
+		fputs("TEMPDIR set by environment variable to ", stderr);
+		fputs(TEMPDIR, stderr);
 		fputc('\n', stderr);
 	}
 
@@ -162,7 +173,11 @@ int main(int argc, char** argv, char** envp)
 			DIRTY_MODE = TRUE;
 			i+= 1;
 		}
-		else if(match(argv[i], "--debug-mode"))
+		else if(match(argv[i], "--no-includes"))
+		{
+			follow_includes = FALSE;
+			i+= 1;
+		}else if(match(argv[i], "--debug-mode"))
 		{
 			/* Handled by precheck */
 			i+= 2;
@@ -195,7 +210,7 @@ int main(int argc, char** argv, char** envp)
 				fputs("\n Aborting to avoid problems\n", stderr);
 				exit(EXIT_FAILURE);
 			}
-			global_token = read_all_tokens(in, global_token, name);
+			global_token = read_all_tokens(in, global_token, name, follow_includes);
 			fclose(in);
 			i += 2;
 		}
@@ -245,6 +260,23 @@ int main(int argc, char** argv, char** envp)
 			debug_flag = FALSE;
 			i += 1;
 		}
+		else if(match(argv[i], "--temp-directory"))
+		{
+			name = argv[i+1];
+			if(NULL == name)
+			{
+				fputs("--temp-directory requires a PATH\n", stderr);
+				exit(EXIT_FAILURE);
+			}
+			if(1 <= DEBUG_LEVEL)
+			{
+				fputs("TEMPDIR set by --temp-directory to ", stderr);
+				fputs(name, stderr);
+				fputc('\n', stderr);
+			}
+			TEMPDIR = name;
+			i += 2;
+		}
 		else
 		{
 			fputs("UNKNOWN ARGUMENT\n", stdout);
@@ -259,7 +291,7 @@ int main(int argc, char** argv, char** envp)
 	{
 		hold_string = calloc(MAX_STRING, sizeof(char));
 		require(NULL != hold_string, "Impossible Exhaustion has occured\n");
-		global_token = read_all_tokens(in, global_token, "STDIN");
+		global_token = read_all_tokens(in, global_token, "STDIN", follow_includes);
 	}
 
 	if(NULL == global_token)
@@ -288,8 +320,19 @@ int main(int argc, char** argv, char** envp)
 	}
 	else
 	{
+		/* Ensure we can write to the temp directory */
+		int permissions = access(TEMPDIR, 0);
+		if(0 != permissions)
+		{
+			fputs("unable to access: ", stderr);
+			fputs(TEMPDIR, stderr);
+			fputs(" for use as a temp directory\nPlease use --temp-directory to set a directory you can use or set the TMPDIR variable\n", stderr);
+			exit(EXIT_FAILURE);
+		}
+
 		name = calloc(100, sizeof(char));
-		strcpy(name, "/tmp/M2-Mesoplanet-XXXXXX");
+		strcpy(name, TEMPDIR);
+		strcat(name, "/M2-Mesoplanet-XXXXXX");
 		i = mkstemp(name);
 		tempfile = fdopen(i, "w");
 		if(NULL != tempfile)
@@ -299,7 +342,7 @@ int main(int argc, char** argv, char** envp)
 			fclose(tempfile);
 
 			/* Make me a real binary */
-			spawn_processes(debug_flag, name, destination_name, envp);
+			spawn_processes(debug_flag, TEMPDIR, name, destination_name, envp);
 
 			/* And clean up the donkey */
 			if(!DIRTY_MODE) remove(name);

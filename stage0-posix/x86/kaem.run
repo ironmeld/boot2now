@@ -29,6 +29,7 @@ BASE_ADDRESS="0x08048000"
 ENDIAN_FLAG="--little-endian"
 BINDIR="../${ARCH_DIR}/bin"
 BUILDDIR="../${ARCH_DIR}/artifact"
+TMPDIR="${BUILDDIR}"
 
 ################################################
 # Phase 12-15 Rebuild M2-Planet from C sources #

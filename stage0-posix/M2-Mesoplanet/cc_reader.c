@@ -264,7 +264,6 @@ int get_token(int c)
 		c = consume_byte(c);
 	}
 
-	new_token(hold_string, string_index + 2);
 	return c;
 }
 
@@ -313,8 +312,6 @@ int read_include(int c)
 		}
 	}
 
-	/* with just a little extra to put in the matching at the end */
-	new_token(hold_string, string_index + 3);
 	return c;
 }
 
@@ -330,8 +327,8 @@ void insert_file_header(char* name, int line)
 	new_token("\n", 3);
 }
 
-struct token_list* read_all_tokens(FILE* a, struct token_list* current, char* filename);
-int include_file(int ch)
+struct token_list* read_all_tokens(FILE* a, struct token_list* current, char* filename, int include);
+int include_file(int ch, int include_file)
 {
 	/* The old state to restore to */
 	char* hold_filename = file;
@@ -348,6 +345,9 @@ int include_file(int ch)
 
 	/* Get new filename */
 	read_include(ch);
+	/* with just a little extra to put in the matching at the end */
+	new_token(hold_string, string_index + 3);
+
 	ch = '\n';
 	new_filename = token->s;
 	/* Remove name from stream */
@@ -402,7 +402,7 @@ int include_file(int ch)
 	hold_number = line + 1;
 
 	/* Read the new file */
-	read_all_tokens(new_file, token, new_filename);
+	if(include_file) read_all_tokens(new_file, token, new_filename, include_file);
 
 	/* put back old file info */
 	insert_file_header(hold_filename, hold_number);
@@ -414,7 +414,7 @@ int include_file(int ch)
 	return ch;
 }
 
-struct token_list* read_all_tokens(FILE* a, struct token_list* current, char* filename)
+struct token_list* read_all_tokens(FILE* a, struct token_list* current, char* filename, int include)
 {
 	token = current;
 	insert_file_header(filename, 1);
@@ -425,7 +425,8 @@ struct token_list* read_all_tokens(FILE* a, struct token_list* current, char* fi
 	while(EOF != ch)
 	{
 		ch = get_token(ch);
-		if(match("#include", token->s)) ch = include_file(ch);
+		new_token(hold_string, string_index + 2);
+		if(match("#include", token->s)) ch = include_file(ch, include);
 	}
 
 	return token;

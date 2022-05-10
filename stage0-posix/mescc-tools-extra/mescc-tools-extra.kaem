@@ -19,10 +19,7 @@
 ## ARCH="${ARCH:-x86}"
 ## M2LIBC="${M2libc:-./M2libc}"
 ## TOOLS="${TOOLS:-../bin}"
-## BLOOD_FLAG="${BLOOD_FLAG:-}"
-## BASE_ADDRESS="${BASE_ADDRESS:-0x08048000}"
 ## BINDIR="${BINDIR:-../bin}"
-## BUILDDIR="${BUILDDIR:-}"
 
 set -ex
 

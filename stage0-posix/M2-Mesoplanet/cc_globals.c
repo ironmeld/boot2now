@@ -44,6 +44,7 @@ int WORDSIZE;
 int ENDIAN;
 char* BASEADDRESS;
 int STDIO_USED;
+char* TEMPDIR;
 
 /* So we don't shoot ourself in the face */
 int FUZZING;

@@ -321,7 +321,7 @@ void populate_env(char** envp)
 		require(4096 > strlen(envp[i]), "envp line exceeds 4096byte limit\n");
 		strcpy(envp_line, envp[i]);
 
-		if(4 <= DEBUG_LEVEL)
+		if(9 <= DEBUG_LEVEL)
 		{
 			fputs("trying envp_line: ", stderr);
 			fputs(envp_line, stderr);
@@ -330,7 +330,7 @@ void populate_env(char** envp)
 
 		env = process_env_variable(envp_line, env);
 
-		if(8 <= DEBUG_LEVEL)
+		if(9 <= DEBUG_LEVEL)
 		{
 			fputs("got var of: ", stderr);
 			fputs(env->var, stderr);

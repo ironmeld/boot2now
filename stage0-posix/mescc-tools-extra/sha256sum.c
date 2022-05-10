@@ -433,6 +433,7 @@ go_again:
 	{
 		fputs(name, stdout);
 		puts(": No such file or directory");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -550,6 +551,7 @@ int main(int argc, char **argv)
 			{
 				fputs(l->name, stdout);
 				puts(": No such file or directory");
+				exit(EXIT_FAILURE);
 			}
 			l = l->next;
 		}
@@ -570,6 +572,7 @@ int main(int argc, char **argv)
 			{
 				fputs(l->name, output);
 				fputs(": No such file or directory\n", output);
+				exit(EXIT_FAILURE);
 			}
 			l = l->next;
 		}
