@@ -1,8 +1,8 @@
 # Boot2Now
 
-This project combines the [Builder-Hex0](https://github.com/ironmeld/builder-hex0) bootstrap kernel with the bootstrap compilers from the [stage0-posix](https://github.com/oriansj/stage0-posix) project in order to bootstrap a C compiler *entirely* from hex files.
+This project combines the [builder-hex0](https://github.com/ironmeld/builder-hex0) bootstrap kernel with the bootstrap compilers from the [stage0-posix](https://github.com/oriansj/stage0-posix) project in order to bootstrap a C (subset) compiler *entirely* from hex files.
 
-# Minimal Bootstrapping
+## Minimal Bootstrapping
 
 Minimized bootstrapping of foundational software is a process for building software tools progressively, from a primitive compiler tool and source language up to a full linux development environment with gcc.
 
@@ -10,9 +10,25 @@ At each stage of development, the tool should build a more capable version of it
 
 Bootstrapping serves to isolate all inputs and outputs in the construction of software. Moreover, a stricter form of authentication includes auditing all tools used in the construction as well, recursively. A strict bootstrap-audit can only be satisfied by bootstrapping your tools from "scratch".
 
-## Status
+## Building
 
-The most kernel in this project is from [builder-hex0](https://github.com/ironmeld/builder-hex0). A snapshot copy of that project is included in the builder-hex0 subdirectory.
+Type `make`.
+
+The Makefile:
+
+* Bootstraps/Builds the boot kernel
+* Creates a large shell script with stage0-posix x86 source included within
+* Runs the kernel under qemu with the shell script in order to build M2-Mesoplanet
+    * An after.kaem script builds and runs the final artifact (currently helloworld from helloworld.c)
+    * The builder writes the artifact back to the hard drive
+    * The builder outputs the length of the artifact to the screen
+* Extracts the artifact from the beginning of the hard drive using the output length
+* Runs the artifact locally
+
+
+## Structure
+
+The kernel in this project is from [builder-hex0](https://github.com/ironmeld/builder-hex0). A snapshot copy of that project is included in the builder-hex0 subdirectory. For detailed history, consult the source project.
 
 The size of the initial boot sector seed is only 384 bytes of binary code. See builder-hex0/builder-hex0-mini.hex0 for the hex source code.
 
@@ -22,13 +38,15 @@ The full builder is purpose-built to build the x86 source from the [stage0-posix
 
 To be clear, "purpose-built" means it contains several "hacks" which minimally supports building stage0-posix but it should not be considered posix compliant otherwise.
 
+I imagine that a more capable kernel will be required to complete a full bootstrap to modern tools, but this will be a lot easier using the most capable compiler that builder-hex0 can build, which is currently M2-Mesoplanet. It might be possible to build a more capable compiler using builder-hex0; I just have not tried to build anything beyond M2-Mesoplanet.
+
 ## Why?
 
 This project is intends to compliment [existing bootstrap projects](#existing-projects) by providing a missing piece: a bootstrap kernel. Two of the bootstrap projects (Guix and live-bootstrap) I looked required a prebuilt POSIX kernel.
 
 A typical C compiler needs to read source files and system headers and it uses kernel system calls to perform file I/O. However, a POSIX kernel is typically built with a C compiler. So, we have a chicken-or-the-egg question. Indeed, when Linus Torvalds released Linux 0.02 he was using minix to compile it. Linux was not self-hostable until version .11.
 
-I believe a proper approach is to build the operating system progressively in lock-step with the tool chain.
+I believe that building the operating system progressively in lock-step with the tool chain is the right approach.
 
 My goal is to minimize the (Effort to Understand Source * Volume of Source) while maximizing progress towards a linux distro.
 
@@ -40,34 +58,35 @@ Another difference with other projects is the method of input. The amount of cod
 ### Bootstrappable
 
 * https://bootstrappable.org
+* https://bootstrapping.miraheze.org/
 * https://github.com/oriansj/talk-notes/blob/master/bootstrappable.org
 
-This project requires a linux kernel. This project targets Scheme as a foundational language.
+This project does not include a kernel. This project targets Scheme as a foundational language.
 
 ### Live bootstrap
 
 * https://github.com/fosslinux/live-bootstrap
 * https://bootstrapping.miraheze.org/wiki/Live-bootstrap
 
-This project requires a linux kernel. This project is fairly strict about [what it considers source code](https://github.com/fosslinux/live-bootstrap#specific-things-to-be-bootstrapped).
+This project does not include a kernel. This project is fairly strict about [what it considers source code](https://github.com/fosslinux/live-bootstrap#specific-things-to-be-bootstrapped).
 
 ### asmc
 
 * https://gitlab.com/giomasce/asmc
 
-Aligned:
+Aligned with my thinking:
   * asmc targets Assembly and C and starts with minimal boot images, which is aligned with my thinking.
   * A tremendous amount of great embrionic boot loader and kernel code
 
 Unaligned:
-  * Unclear evolutionary process
   * Presumes nasm and starts with thousands of lines of assembly code
+  * Presumes python
   * 6 kb seed is large
-  * Presumes python and make
   * asmc eventually targets loading code via iPXE and a network card, which:
-    * Significantly restricts the type of physical machine that are able to support that bootstrapping process.
+    * Restricts the type of physical machine that are able to support that bootstrapping process.
     * Imposes a significant burden on the bootstrapper to setup a network and a PXE server external to the bootstrap machine.
-    * Networking requires too much complexity to bootstrap manually
+    * Networking introduces a lot of complexity to bootstrap manually
+  * Unclear roadmap / project goals
 
 ### tccboot
 
@@ -94,7 +113,7 @@ Starts with a tiny monitor that allow entering octal.
     * Each phase should support source code which is progressively more expressive to reduce the sheer volume of overall auditable code.
 
 * A proper audit requires the ability to audit all source artifacts that will be used as inputs.
-* To be useful, The bootstrap must evolve to a set of modern linux kernel and development tools 
+* To be useful, the bootstrap must evolve to a set of modern linux kernel and development tools 
 * The bootstrap requires starting from a specific environment (i.e. hardware, which may be virtualized).
 * The bootstrap process may require transitions to more sophisticated environments (i.e. 32-bit to 64-bit machine)
 * Boostraps tied to simpler hardware are easier to build.
@@ -116,7 +135,7 @@ Start with the simplist possible translation to a binary with minimal machine re
 
 ```
 build-image = builder-image + source
-result-image = build-image()
+result-image, length = build-image()
 ```
 
 The notation build-image() means we invoke the build by booting the image. Initially, the image can access itself by reading and writing the disc using the BIOS. It can also write a new image back to the disc via the BIOS. The function is complete when the system terminates.
@@ -131,7 +150,7 @@ The notation build-image() means we invoke the build by booting the image. Initi
 
 ## Build2Now Structure
 
-A Build2Now compiler should include:
+A Build2Now compiler should (eventually) include:
    * a bootable image of the compiler
    * sha256 checksum of the compiler image
    * sha256 checksum of (parent) image that compiled the compiler
