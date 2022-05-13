@@ -19,9 +19,9 @@ helloworld.src: helloworld.c after.kaem stage0-posix.src
 	# this builds M2-Mesoplanet compiler and runs after.kaem
 	cat stage0-posix.src >> helloworld.src
 
-stage0-posix.src:
+stage0-posix.src: gather-source.sh
 	./gather-source.sh > stage0-posix.src
-	
+
 builder-hex0/builder-hex0-self-built.bin:
 	make -C builder-hex0 builder-hex0-self-built.bin
 
