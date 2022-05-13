@@ -54,10 +54,12 @@ The Makefile does this:
 3. Write the shell script for your build directly on partition 4 of the disk image
     * Partition 4 starts at sector 8 which is byte offset 3584 of the disk
     * The script must be zero terminated, so the maximum length is the image size minus 3585 bytes
-    * See self-test.sh for guidance
+    * See build.sh for guidance
 4. Launch the PC with the disk image
 5. Wait until the machine reboots
 6. The disk image itself is the result of the build
+
+Why put the source on partition 4? The idea was to reserve partitions 1 to 3 for writing a boot partition, another file system, and perhaps a partition for logs. The idea is that you could resize the partitions to meet your requirements (by altering the partition table in the MBR) and the kernel would support writing to any of the partitions (e.g. /dev/hda1). But that flexibility is not currently implemented. Currently, you can only write back to the disk as a whole by writing to "/dev/hda".
 
 
 ## Machine Requirements
@@ -81,23 +83,23 @@ Essentially, the kernel starts by executing the equivalent of this command:
 cat /dev/hda4 | internalshell
 ```
 
-The internal shell includes two build-in commands:
+The internal shell includes two built-in commands:
 * src: create source file from stdin.
 * hex0: compile hex0 file to binary file.
 
-The internal shell will also execute any file that has previously been written (by hex0). Note that the internal shell only supports parsing exactly one argument that it will pass to the command. This is enough to support executing a new shell and passing it the name of a shell script to run.
+The internal shell is also able to execute any file that has previously been written (by hex0). Note that the internal shell only supports parsing exactly one argument that it will pass to the command. This is enough to support executing a new shell and passing it the name of a shell script to run.
 
 
 ### The src command
 
 ```
-src $number_of_lines $filename 
+src $number_of_bytes $filename
 ```
-Read N lines from standard input and write to a file.
+Read N bytes from standard input and write to a file.
 
 Example:
 ```
-src 4 foo.hex0
+src 27 foo.hex0
 45 23 23
 23 45
 53 55

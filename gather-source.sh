@@ -96,7 +96,7 @@ for src in \
     M2libc/bootstrappable.h \
     x86.answers
 do
-    echo "src $(cd stage0-posix; wc -l $src)"
+    echo "src $(cd stage0-posix; wc -c $src)"
     cat stage0-posix/$src
 done
 echo "hex0 ./bootstrap-seeds/POSIX/x86/hex0_x86.hex0 ./bootstrap-seeds/POSIX/x86/hex0-seed"
