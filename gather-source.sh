@@ -99,6 +99,7 @@ do
     echo "src $(cd stage0-posix; wc -c $src)"
     cat stage0-posix/$src
 done
+echo "src 0 ./x86/artifact"
 echo "hex0 ./bootstrap-seeds/POSIX/x86/hex0_x86.hex0 ./bootstrap-seeds/POSIX/x86/hex0-seed"
 echo "hex0 ./bootstrap-seeds/POSIX/x86/kaem-minimal.hex0 ./bootstrap-seeds/POSIX/x86/kaem-optional-seed"
 echo "./bootstrap-seeds/POSIX/x86/kaem-optional-seed ./kaem.x86"
