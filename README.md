@@ -14,31 +14,46 @@ Bootstrapping serves to isolate all inputs and outputs in the construction of so
 
 Type `make`.
 
-The Makefile:
+The Makefile performs these actions:
 
-* Bootstraps/Builds the boot kernel
-* Creates a large shell script with stage0-posix x86 source included within
-* Runs the kernel under qemu with the shell script in order to build M2-Mesoplanet
-    * An after.kaem script builds and runs the final artifact (currently helloworld from helloworld.c)
-    * The builder writes the artifact back to the hard drive
-    * The builder outputs the length of the artifact to the screen
-* Extracts the artifact from the beginning of the hard drive using the output length
-* Runs the artifact locally
+* Bootstraps the first two boot stages (in the boot-stages directory)
+    * Bootstraps the first boot kernel/disk image: builder-hex0-mini
+        * This is currently built with the hex0 seed from stage0-posix
+        * builder-hex0-mini can also be built from cut/xxd and it can also build itself
+        * The Makefile in modules/builder-hex0 can be used to cross check all three methods
+    * Builds the second boot kernel/disk image, builder-hex0, using the first
 
+* Builds a series of compilers and tools (in the tool-steps directory) using the boot stage images
+    * First it creates the shell script with source (from stage0-posix) included within
+    * It launches the builder (builder-hex0) to build these compilers (hex0, hex1, hex2, M0, M2, etc)
+    * It creates a new builder disk image pre-populated with executables it has built
+    * The builder writes the disk image back to the hard drive
+    * The builder outputs the length of the image to the screen
+    * The new build is extracted from the disk image
+
+* Builds example executables (in the examples directory)
+    * It builds sample programs using a builder with compilers and tools
 
 ## Structure
 
-The kernel in this project is from [builder-hex0](https://github.com/ironmeld/builder-hex0). A snapshot copy of that project is included in the builder-hex0 subdirectory. For detailed history, consult the source project.
+# Boot Stages and Tool Steps
 
-The size of the initial boot sector seed is only 384 bytes of binary code. See builder-hex0/builder-hex0-mini.hex0 for the hex source code.
+Every boot stage is used to build the kernel for the next boot stage. A reboot is required to transition from boot stage to boot stage.
 
-The "mini" builder is used to build a 3K minimal posix kernel (also in the form of a disk boot image), which is called the "full" builder. See builder-hex0/builder-hex0.hex0 for the hex source code.
+The tool-steps directory contains intermediate steps between kernels. Each step builds a new tool which is ultimately used to build a new kernel. Once the new kernel is built, the intent is to group the tool steps together into a new boot stage which then can support developing tool steps for the next boot stage. However, a group of tools may need to be divided into multiple boot stages if they use too much memory or too many files or they exceed some other limitation that prevent building everything in one stage.
 
-The full builder is purpose-built to build the x86 source from the [stage0-posix](https://github.com/oriansj/stage0-posix) project, a partial snapshot of which is included in the stage0-posix subdirectory. This results in a C like compiler called M2-Mesoplanet which can then be used to compile C like programs.
+The examples directory contains builds of specific executables such as "helloworld" which is used to demonstrate the efficacy of a boot-stage or tool-step. Historically, a boot-stage or tool-step would culminate by building a "helloworld" executable with the final compiler (such as M2-Mesoplanet from stage0-posix). However, boot-stages and tool-steps now culminate by building the next new stage or tool step and so the examples for building and running a single executable have been moved to the examples directory, as they may be useful for testing or demonstration purposes.
+
+# Modules
+
+The first two boot stages in this project comes from the [builder-hex0 project](https://github.com/ironmeld/builder-hex0). This project is included as a git submodule in the modules subdirectory. For detailed history, consult the source project. The size of the initial boot sector seed is only 384 bytes of binary code. See modules/builder-hex0/builder-hex0-mini.hex0 for the hex source code.
+
+The "mini" builder is used to build a 3K minimal posix kernel (also in the form of a disk boot image), which is called the "full" builder. See modules/builder-hex0/builder-hex0.hex0 for the hex source code.
+
+The full builder is purpose-built to build the x86 source from the [stage0-posix](https://github.com/oriansj/stage0-posix) project, which is included as a git submodule in the modules/stage0-posix subdirectory. This results in a C like compiler called M2-Mesoplanet which can then be used to compile C like programs.
 
 To be clear, "purpose-built" means it contains several "hacks" which minimally supports building stage0-posix but it should not be considered posix compliant otherwise.
 
-I imagine that a more capable kernel will be required to complete a full bootstrap to modern tools, but this will be a lot easier using the most capable compiler that builder-hex0 can build, which is currently M2-Mesoplanet. It might be possible to build a more capable compiler using builder-hex0; I just have not tried to build anything beyond M2-Mesoplanet.
 
 ## Why?
 

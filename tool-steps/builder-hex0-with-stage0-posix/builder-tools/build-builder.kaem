@@ -1,0 +1,3 @@
+../x86/bin/kaem --verbose --strict --file ./build-builder-utils.kaem
+../x86/bin/kaem --verbose --strict --file ./build-builder-stage0-posix-srcs.kaem
+../x86/bin/kaem --verbose --strict --file ./build-builder-stage0-posix-cmds.kaem

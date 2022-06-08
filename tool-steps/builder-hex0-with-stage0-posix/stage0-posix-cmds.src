@@ -1,0 +1,3 @@
+hex0 ./bootstrap-seeds/POSIX/x86/hex0_x86.hex0 ./bootstrap-seeds/POSIX/x86/hex0-seed
+hex0 ./bootstrap-seeds/POSIX/x86/kaem-minimal.hex0 ./bootstrap-seeds/POSIX/x86/kaem-optional-seed
+./bootstrap-seeds/POSIX/x86/kaem-optional-seed ./kaem.x86

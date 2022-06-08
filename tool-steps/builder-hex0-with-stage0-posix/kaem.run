@@ -1,0 +1,2 @@
+cd builder-tools
+../x86/bin/kaem --verbose --strict --file ./build-builder.kaem
