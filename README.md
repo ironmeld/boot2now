@@ -12,7 +12,15 @@ Bootstrapping serves to isolate all inputs and outputs in the construction of so
 
 ## Building
 
+The build requires qemu-system-x86_64 with kvm enabled.
+
 Type `make`.
+
+If you do not have kvm enabled you can build without it using the following command
+but a larger build will be extremely slow:
+```
+ENABLE_KVM= make
+```
 
 The Makefile performs these actions:
 
