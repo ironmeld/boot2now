@@ -4,9 +4,7 @@ PATH=x86/bin
 catm /dev/hda \
   x86/bin/builder-hex0.bin \
   x86/bin/builder-hex0.bin.src x86/bin/builder-hex0.bin \
-  x86/bin/builder-hex0.bin.src.src x86/bin/builder-hex0.bin.src \
   x86/bin/src-header.src x86/bin/src-header \
-  x86/bin/src-header.src.src x86/bin/src-header.src \
   x86/bin/sha256sum.src x86/bin/sha256sum \
   x86/bin/blood-elf.src x86/bin/blood-elf \
   x86/bin/catm.src x86/bin/catm \
@@ -26,6 +24,7 @@ catm /dev/hda \
   x86/bin/untar.src x86/bin/untar \
   M2-Planet/cc.h.src M2-Planet/cc.h \
   M2libc/sys/types.h.src M2libc/sys/types.h \
+  M2libc/gcc_req.h.src M2libc/gcc_req.h \
   M2libc/stddef.h.src M2libc/stddef.h \
   mescc-tools/hex2.h.src mescc-tools/hex2.h \
   mescc-tools/Kaem/kaem.h.src mescc-tools/Kaem/kaem.h \
@@ -53,13 +52,20 @@ catm /dev/hda \
   M2libc/signal.h.src M2libc/signal.h \
   M2libc/stdlib.h.src M2libc/stdlib.h \
   M2libc/bootstrappable.h.src M2libc/bootstrappable.h \
+  M2libc/bootstrappable.c.src M2libc/bootstrappable.c \
   M2libc/x86/linux/unistd.c.src M2libc/x86/linux/unistd.c \
   M2libc/x86/linux/fcntl.c.src M2libc/x86/linux/fcntl.c \
   M2libc/x86/linux/sys/stat.c.src M2libc/x86/linux/sys/stat.c \
   M2libc/stdlib.c.src M2libc/stdlib.c \
   M2libc/stdio.c.src M2libc/stdio.c \
+  M2libc/string.c.src M2libc/string.c \
   M2libc/x86/x86_defs.M1.src M2libc/x86/x86_defs.M1 \
   M2libc/x86/libc-full.M1.src M2libc/x86/libc-full.M1 \
   M2libc/x86/ELF-x86.hex2.src M2libc/x86/ELF-x86.hex2 \
   M2libc/x86/ELF-x86-debug.hex2.src M2libc/x86/ELF-x86-debug.hex2 \
-  x86/artifact.src
+  /.src \
+  tmp.src \
+  x86.src \
+  x86/artifact.src \
+  mescc-tools-extra \
+  builder-tools

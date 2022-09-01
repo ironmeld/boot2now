@@ -36,6 +36,7 @@ for src in \
     M2libc/x86/libc-core.M1 \
     M2libc/x86/ELF-x86-debug.hex2 \
     M2libc/sys/types.h \
+    M2libc/gcc_req.h \
     M2libc/stddef.h \
     M2libc/x86/linux/unistd.c \
     M2libc/x86/linux/fcntl.c \
@@ -71,8 +72,9 @@ for src in \
     mescc-tools-extra/catm.c \
     mescc-tools-extra/cp.c \
     mescc-tools-extra/chmod.c \
-	mescc-tools-extra/rm.c \
+    mescc-tools-extra/rm.c \
     M2libc/string.h \
+    M2libc/string.c \
     M2libc/stdio.h \
     M2libc/sys/stat.h \
     M2libc/amd64/linux/sys/stat.c \
@@ -101,4 +103,9 @@ do
     echo "src $(cd ../../modules/stage0-posix; wc -c $src)"
     cat ../../modules/stage0-posix/$src
 done
-echo "src 0 ./x86/artifact"
+echo "src 0 /"
+echo "src 0 x86"
+echo "src 0 x86/artifact"
+echo "src 0 mescc-tools-extra"
+echo "src 0 builder-tools"
+echo "src 0 mescc-tools-extra"

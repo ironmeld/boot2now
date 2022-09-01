@@ -16,8 +16,6 @@ M2-Mesoplanet --architecture x86 -f ./src-header.c -o ../x86/bin/src-header
 cd ..
 PATH=x86/bin
 src-header x86/bin/src-header
-src-header x86/bin/src-header.src
 
 hex2 --file builder-tools/builder-hex0.hex0 --output x86/bin/builder-hex0.bin --architecture x86 --base-address 0x7C00 --little-endian
 src-header x86/bin/builder-hex0.bin
-src-header x86/bin/builder-hex0.bin.src

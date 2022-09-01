@@ -21,7 +21,7 @@ BUILD/stage0-posix-builder-tools-srcs.src: ./gather-stage0-posix-builder-tools-s
 	./$< > $@
 
 ../../boot-stages/builder-hex0/BUILD/builder-hex0.bin:
-	make -C ../builder-hex0
+	make -C ../../boot-stages/builder-hex0
 
 BUILD:
 	mkdir BUILD

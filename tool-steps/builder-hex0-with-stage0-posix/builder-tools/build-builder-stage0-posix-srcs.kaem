@@ -20,6 +20,7 @@ src-header x86/bin/untar
 
 src-header M2-Planet/cc.h
 src-header M2libc/sys/types.h
+src-header M2libc/gcc_req.h
 src-header M2libc/stddef.h
 src-header mescc-tools/hex2.h
 src-header mescc-tools/Kaem/kaem.h
@@ -47,13 +48,20 @@ src-header M2libc/riscv64/linux/unistd.c
 src-header M2libc/signal.h
 src-header M2libc/stdlib.h
 src-header M2libc/bootstrappable.h
+src-header M2libc/bootstrappable.c
 src-header M2libc/x86/linux/unistd.c
 src-header M2libc/x86/linux/fcntl.c
 src-header M2libc/x86/linux/sys/stat.c
 src-header M2libc/stdlib.c
 src-header M2libc/stdio.c
+src-header M2libc/string.c
 src-header M2libc/x86/x86_defs.M1
 src-header M2libc/x86/libc-full.M1
 src-header M2libc/x86/ELF-x86.hex2
 src-header M2libc/x86/ELF-x86-debug.hex2
+src-header /
+src-header tmp
+src-header x86
 src-header x86/artifact
+src-header mescc-tools-extra
+src-header builder-tools

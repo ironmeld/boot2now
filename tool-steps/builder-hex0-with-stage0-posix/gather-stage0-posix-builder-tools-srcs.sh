@@ -4,6 +4,8 @@ set -euo pipefail
 echo "src $(wc -c kaem.run)"
 cat kaem.run
 
+echo "src 0 builder-tools"
+
 echo "src $(wc -c builder-tools/build-builder.kaem)"
 cat builder-tools/build-builder.kaem
 
