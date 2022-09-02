@@ -12,9 +12,11 @@ Bootstrapping serves to isolate all inputs and outputs in the construction of so
 
 ## Building
 
+Use `git clone --recurse-submodules <repository>` to clone the code.
+
 The build requires qemu-system-x86_64 with kvm enabled.
 
-Type `make`.
+In the top directory of the project, type `make`.
 
 If you do not have kvm enabled you can build without it using the following command
 but a larger build will be extremely slow:
@@ -32,7 +34,7 @@ The Makefile performs these actions:
     * Builds the second boot kernel/disk image, builder-hex0, using the first
 
 * Builds a series of compilers and tools (in the tool-steps directory) using the boot stage images
-    * First it creates the shell script with source (from stage0-posix) included within
+    * First it creates the build shell script with source (from stage0-posix) embedded within the script
     * It launches the builder (builder-hex0) to build these compilers (hex0, hex1, hex2, M0, M2, etc)
     * It creates a new builder disk image pre-populated with executables it has built
     * The builder writes the disk image back to the hard drive
