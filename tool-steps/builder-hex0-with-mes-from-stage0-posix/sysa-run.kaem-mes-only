@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# SPDX-FileCopyrightText: 2021 Andrius Štikonas <andrius@stikonas.eu>
+# SPDX-FileCopyrightText: 2021 Paul Dersey <pdersey@gmail.com>
+# SPDX-FileCopyrightText: 2020-2022 fosslinux <fosslinux@aussies.space>
+# SPDX-FileCopyrightText: 2022 Dor Askayo <dor.askayo@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+set -ex
+
+# Environmental variables needed for mes
+NYACC_PKG=nyacc-1.00.2
+MES_PKG=mes-0.24
+MES_PKG_DIR=mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037
+MES_PREFIX=${sysa}/${MES_PKG}/build/${MES_PKG_DIR}
+GUILE_LOAD_PATH=${MES_PREFIX}/mes/module:${MES_PREFIX}/module:${sysa}/${MES_PKG}/build/${NYACC_PKG}/module
+
+UPDATE_CHECKSUMS=True
+# mes
+pkg=${MES_PKG}
+cd ${pkg}
+kaem --file ${pkg}.kaem
+cd ..

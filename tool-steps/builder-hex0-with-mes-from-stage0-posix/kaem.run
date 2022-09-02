@@ -1,0 +1,24 @@
+ARCH_DIR="x86"
+ARCH="x86"
+ARCH_DIR="x86"
+M2LIBC="M2libc"
+TOOLS="${ARCH_DIR}/bin"
+BLOOD_FLAG=" "
+BASE_ADDRESS="0x08048000"
+ENDIAN_FLAG="--little-endian"
+BINDIR="${ARCH_DIR}/bin"
+BUILDDIR="${ARCH_DIR}/artifact"
+
+M2LIBC_PATH=M2libc
+PATH=/x86/bin
+
+ungz --file rootfs.tar.gz --output rootfs.tar
+untar --file rootfs.tar
+
+M2-Mesoplanet --architecture x86 -f simple-patch.c -o /x86/bin/simple-patch
+simple-patch /sysa/mes-0.24/mes-0.24.kaem mes-0.24.kaem-apply-patches.before mes-0.24.kaem-apply-patches.after
+simple-patch /sysa/mes-0.24/mes-0.24.kaem mes-0.24.kaem-base-address.before mes-0.24.kaem-base-address.after
+kaem --verbose --strict --file ./after.kaem
+
+cd builder-tools
+kaem --verbose --strict --file ./build-builder.kaem

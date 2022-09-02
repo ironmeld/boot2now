@@ -1,0 +1,163 @@
+sysa=/sysa
+prefix=/usr
+bindir=${prefix}/bin
+libdir=${prefix}/lib
+incdir=${prefix}/include
+srcdir=${prefix}/src
+
+MES_PKG=mes-0.24
+MES_PKG_DIR=mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037
+MES_PREFIX=${sysa}/${MES_PKG}/build/${MES_PKG_DIR}
+
+catm x86-bin \
+  x86/bin/builder-hex0.bin \
+  x86/bin/builder-hex0.bin.src x86/bin/builder-hex0.bin \
+  x86/bin/src-header.src x86/bin/src-header \
+  x86/bin/sha256sum.src x86/bin/sha256sum \
+  x86/bin/blood-elf.src x86/bin/blood-elf \
+  x86/bin/catm.src x86/bin/catm \
+  x86/bin/chmod.src x86/bin/chmod \
+  x86/bin/cp.src x86/bin/cp \
+  x86/bin/get_machine.src x86/bin/get_machine \
+  x86/bin/hex2.src x86/bin/hex2 \
+  x86/bin/kaem.src x86/bin/kaem \
+  x86/bin/M1.src x86/bin/M1 \
+  x86/bin/M2-Mesoplanet.src x86/bin/M2-Mesoplanet \
+  x86/bin/M2-Planet.src x86/bin/M2-Planet \
+  x86/bin/match.src x86/bin/match \
+  x86/bin/mkdir.src x86/bin/mkdir \
+  x86/bin/rm.src x86/bin/rm \
+  x86/bin/sha256sum.src x86/bin/sha256sum \
+  x86/bin/ungz.src x86/bin/ungz \
+  x86/bin/untar.src x86/bin/untar
+
+catm M2 \
+  M2-Planet/cc.h.src M2-Planet/cc.h \
+  M2libc/sys/types.h.src M2libc/sys/types.h \
+  M2libc/gcc_req.h.src M2libc/gcc_req.h \
+  M2libc/stddef.h.src M2libc/stddef.h \
+  mescc-tools/hex2.h.src mescc-tools/hex2.h \
+  mescc-tools/Kaem/kaem.h.src mescc-tools/Kaem/kaem.h \
+  M2-Mesoplanet/cc.h.src M2-Mesoplanet/cc.h \
+  M2libc/string.h.src M2libc/string.h \
+  M2libc/stdio.h.src M2libc/stdio.h \
+  M2libc/sys/stat.h.src M2libc/sys/stat.h \
+  M2libc/amd64/linux/sys/stat.c.src M2libc/amd64/linux/sys/stat.c \
+  M2libc/armv7l/linux/sys/stat.c.src M2libc/armv7l/linux/sys/stat.c \
+  M2libc/aarch64/linux/sys/stat.c.src M2libc/aarch64/linux/sys/stat.c \
+  M2libc/riscv32/linux/sys/stat.c.src M2libc/riscv32/linux/sys/stat.c \
+  M2libc/riscv64/linux/sys/stat.c.src M2libc/riscv64/linux/sys/stat.c \
+  M2libc/fcntl.h.src M2libc/fcntl.h \
+  M2libc/amd64/linux/fcntl.c.src M2libc/amd64/linux/fcntl.c \
+  M2libc/armv7l/linux/fcntl.c.src M2libc/armv7l/linux/fcntl.c \
+  M2libc/aarch64/linux/fcntl.c.src M2libc/aarch64/linux/fcntl.c \
+  M2libc/riscv32/linux/fcntl.c.src M2libc/riscv32/linux/fcntl.c \
+  M2libc/riscv64/linux/fcntl.c.src M2libc/riscv64/linux/fcntl.c \
+  M2libc/unistd.h.src M2libc/unistd.h \
+  M2libc/amd64/linux/unistd.c.src M2libc/amd64/linux/unistd.c \
+  M2libc/armv7l/linux/unistd.c.src M2libc/armv7l/linux/unistd.c \
+  M2libc/aarch64/linux/unistd.c.src M2libc/aarch64/linux/unistd.c \
+  M2libc/riscv32/linux/unistd.c.src M2libc/riscv32/linux/unistd.c \
+  M2libc/riscv64/linux/unistd.c.src M2libc/riscv64/linux/unistd.c \
+  M2libc/signal.h.src M2libc/signal.h \
+  M2libc/stdlib.h.src M2libc/stdlib.h \
+  M2libc/bootstrappable.h.src M2libc/bootstrappable.h \
+  M2libc/bootstrappable.c.src M2libc/bootstrappable.c \
+  M2libc/x86/linux/unistd.c.src M2libc/x86/linux/unistd.c \
+  M2libc/x86/linux/fcntl.c.src M2libc/x86/linux/fcntl.c \
+  M2libc/x86/linux/sys/stat.c.src M2libc/x86/linux/sys/stat.c \
+  M2libc/stdlib.c.src M2libc/stdlib.c \
+  M2libc/stdio.c.src M2libc/stdio.c \
+  M2libc/string.c.src M2libc/string.c \
+  M2libc/x86/x86_defs.M1.src M2libc/x86/x86_defs.M1 \
+  M2libc/x86/libc-full.M1.src M2libc/x86/libc-full.M1 \
+  M2libc/x86/ELF-x86.hex2.src M2libc/x86/ELF-x86.hex2 \
+  M2libc/x86/ELF-x86-debug.hex2.src M2libc/x86/ELF-x86-debug.hex2 \
+  /.src \
+  tmp.src \
+  x86.src \
+  x86/artifact.src \
+  mescc-tools-extra.src \
+  builder-tools.src
+
+catm /dev/hda \
+  x86-bin M2 \
+  ${bindir}/mescc.scm.src ${bindir}/mescc.scm \
+  ${libdir}/x86-mes/libc.a.src ${libdir}/x86-mes/libc.a \
+  ${libdir}/x86-mes/libc.s.src ${libdir}/x86-mes/libc.s \
+  ${libdir}/x86-mes/libc+tcc.a.src ${libdir}/x86-mes/libc+tcc.a \
+  ${libdir}/x86-mes/libc+tcc.s.src ${libdir}/x86-mes/libc+tcc.s \
+  ${bindir}/mes.src ${bindir}/mes \
+  ${prefix}/lib/x86-mes/libc.a.src ${prefix}/lib/x86-mes/libc.a \
+  ${prefix}/lib/x86-mes/libc+tcc.a.src ${prefix}/lib/x86-mes/libc+tcc.a \
+  ${prefix}/lib/x86-mes/libmescc.a.src ${prefix}/lib/x86-mes/libmescc.a \
+  ${prefix}/lib/x86-mes/libc.s.src ${prefix}/lib/x86-mes/libc.s \
+  ${prefix}/lib/x86-mes/libc+tcc.s.src ${prefix}/lib/x86-mes/libc+tcc.s \
+  ${prefix}/lib/x86-mes/libmescc.s.src ${prefix}/lib/x86-mes/libmescc.s \
+  ${prefix}/lib/x86-mes/x86.M1.src ${prefix}/lib/x86-mes/x86.M1 \
+  ${prefix}/lib/x86-mes/crt1.o.src ${prefix}/lib/x86-mes/crt1.o \
+  ${prefix}/lib/x86-mes/crt1.s.src ${prefix}/lib/x86-mes/crt1.s \
+  ${prefix}/lib/linux/x86-mes/elf32-footer-single-main.hex2.src ${prefix}/lib/linux/x86-mes/elf32-footer-single-main.hex2 \
+  ${prefix}/lib/linux/x86-mes/elf32-header.hex2.src ${prefix}/lib/linux/x86-mes/elf32-header.hex2 \
+  ${incdir}/alloca.h.src ${incdir}/alloca.h \
+  ${incdir}/argz.h.src ${incdir}/argz.h \
+  ${incdir}/ar.h.src ${incdir}/ar.h \
+  ${incdir}/assert.h.src ${incdir}/assert.h \
+  ${incdir}/ctype.h.src ${incdir}/ctype.h \
+  ${incdir}/dirent.h.src ${incdir}/dirent.h \
+  ${incdir}/dirstream.h.src ${incdir}/dirstream.h \
+  ${incdir}/dlfcn.h.src ${incdir}/dlfcn.h \
+  ${incdir}/endian.h.src ${incdir}/endian.h \
+  ${incdir}/errno.h.src ${incdir}/errno.h \
+  ${incdir}/fcntl.h.src ${incdir}/fcntl.h \
+  ${incdir}/features.h.src ${incdir}/features.h \
+  ${incdir}/float.h.src ${incdir}/float.h \
+  ${incdir}/getopt.h.src ${incdir}/getopt.h \
+  ${incdir}/grp.h.src ${incdir}/grp.h \
+  ${incdir}/inttypes.h.src ${incdir}/inttypes.h \
+  ${incdir}/libgen.h.src ${incdir}/libgen.h \
+  ${incdir}/limits.h.src ${incdir}/limits.h \
+  ${incdir}/locale.h.src ${incdir}/locale.h \
+  ${incdir}/math.h.src ${incdir}/math.h \
+  ${incdir}/memory.h.src ${incdir}/memory.h \
+  ${incdir}/pwd.h.src ${incdir}/pwd.h \
+  ${incdir}/setjmp.h.src ${incdir}/setjmp.h \
+  ${incdir}/signal.h.src ${incdir}/signal.h \
+  ${incdir}/stdarg.h.src ${incdir}/stdarg.h \
+  ${incdir}/stdbool.h.src ${incdir}/stdbool.h \
+  ${incdir}/stddef.h.src ${incdir}/stddef.h \
+  ${incdir}/stdint.h.src ${incdir}/stdint.h \
+  ${incdir}/stdio.h.src ${incdir}/stdio.h \
+  ${incdir}/stdlib.h.src ${incdir}/stdlib.h \
+  ${incdir}/stdnoreturn.h.src ${incdir}/stdnoreturn.h \
+  ${incdir}/string.h.src ${incdir}/string.h \
+  ${incdir}/strings.h.src ${incdir}/strings.h \
+  ${incdir}/termio.h.src ${incdir}/termio.h \
+  ${incdir}/time.h.src ${incdir}/time.h \
+  ${incdir}/unistd.h.src ${incdir}/unistd.h \
+  ${incdir}/linux/syscall.h.src ${incdir}/linux/syscall.h \
+  ${incdir}/linux/x86/syscall.h.src ${incdir}/linux/x86/syscall.h \
+  ${incdir}/mes/builtins.h.src ${incdir}/mes/builtins.h \
+  ${incdir}/mes/cc.h.src ${incdir}/mes/cc.h \
+  ${incdir}/mes/config.h.src ${incdir}/mes/config.h \
+  ${incdir}/mes/constants.h.src ${incdir}/mes/constants.h \
+  ${incdir}/mes/lib.h.src ${incdir}/mes/lib.h \
+  ${incdir}/mes/lib-mini.h.src ${incdir}/mes/lib-mini.h \
+  ${incdir}/mes/mes.h.src ${incdir}/mes/mes.h \
+  ${incdir}/mes/symbols.h.src ${incdir}/mes/symbols.h \
+  ${incdir}/sys/cdefs.h.src ${incdir}/sys/cdefs.h \
+  ${incdir}/sys/dir.h.src ${incdir}/sys/dir.h \
+  ${incdir}/sys/file.h.src ${incdir}/sys/file.h \
+  ${incdir}/sys/ioctl.h.src ${incdir}/sys/ioctl.h \
+  ${incdir}/sys/mman.h.src ${incdir}/sys/mman.h \
+  ${incdir}/sys/param.h.src ${incdir}/sys/param.h \
+  ${incdir}/sys/resource.h.src ${incdir}/sys/resource.h \
+  ${incdir}/sys/select.h.src ${incdir}/sys/select.h \
+  ${incdir}/sys/stat.h.src ${incdir}/sys/stat.h \
+  ${incdir}/sys/timeb.h.src ${incdir}/sys/timeb.h \
+  ${incdir}/sys/time.h.src ${incdir}/sys/time.h \
+  ${incdir}/sys/times.h.src ${incdir}/sys/times.h \
+  ${incdir}/sys/types.h.src ${incdir}/sys/types.h \
+  ${incdir}/sys/ucontext.h.src ${incdir}/sys/ucontext.h \
+  ${incdir}/sys/user.h.src ${incdir}/sys/user.h \
+  ${incdir}/sys/wait.h.src ${incdir}/sys/wait.h

@@ -1,0 +1,1 @@
+untar --non-strict --file ../src/${MES_PKG}.tar # ignore symlinks

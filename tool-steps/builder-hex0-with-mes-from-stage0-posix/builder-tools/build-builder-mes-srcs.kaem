@@ -1,0 +1,90 @@
+sysa=/sysa
+prefix=/usr
+bindir=${prefix}/bin
+libdir=${prefix}/lib
+incdir=${prefix}/include
+srcdir=${prefix}/src
+
+src-header ${bindir}/mes
+src-header ${bindir}/mescc.scm
+
+src-header ${libdir}/x86-mes/libmescc.a
+src-header ${libdir}/x86-mes/libmescc.s
+
+src-header ${libdir}/x86-mes/libc.a
+src-header ${libdir}/x86-mes/libc.s
+
+src-header ${libdir}/x86-mes/libc+tcc.a
+src-header ${libdir}/x86-mes/libc+tcc.s
+
+src-header ${libdir}/x86-mes/x86.M1
+src-header ${libdir}/x86-mes/crt1.o
+src-header ${libdir}/x86-mes/crt1.s
+src-header ${libdir}/linux/x86-mes/elf32-footer-single-main.hex2
+src-header ${libdir}/linux/x86-mes/elf32-header.hex2
+
+src-header ${incdir}/alloca.h
+src-header ${incdir}/argz.h
+src-header ${incdir}/ar.h
+src-header ${incdir}/assert.h
+src-header ${incdir}/ctype.h
+src-header ${incdir}/dirent.h
+src-header ${incdir}/dirstream.h
+src-header ${incdir}/dlfcn.h
+src-header ${incdir}/endian.h
+src-header ${incdir}/errno.h
+src-header ${incdir}/fcntl.h
+src-header ${incdir}/features.h
+src-header ${incdir}/float.h
+src-header ${incdir}/getopt.h
+src-header ${incdir}/grp.h
+src-header ${incdir}/inttypes.h
+src-header ${incdir}/libgen.h
+src-header ${incdir}/limits.h
+src-header ${incdir}/locale.h
+src-header ${incdir}/math.h
+src-header ${incdir}/memory.h
+src-header ${incdir}/pwd.h
+src-header ${incdir}/setjmp.h
+src-header ${incdir}/signal.h
+src-header ${incdir}/stdarg.h
+src-header ${incdir}/stdbool.h
+src-header ${incdir}/stddef.h
+src-header ${incdir}/stdint.h
+src-header ${incdir}/stdio.h
+src-header ${incdir}/stdlib.h
+src-header ${incdir}/stdnoreturn.h
+src-header ${incdir}/string.h
+src-header ${incdir}/strings.h
+src-header ${incdir}/termio.h
+src-header ${incdir}/time.h
+src-header ${incdir}/unistd.h
+
+src-header ${incdir}/linux/syscall.h
+src-header ${incdir}/linux/x86/syscall.h
+
+src-header ${incdir}/mes/builtins.h
+src-header ${incdir}/mes/cc.h
+src-header ${incdir}/mes/config.h
+src-header ${incdir}/mes/constants.h
+src-header ${incdir}/mes/lib.h
+src-header ${incdir}/mes/lib-mini.h
+src-header ${incdir}/mes/mes.h
+src-header ${incdir}/mes/symbols.h
+
+src-header ${incdir}/sys/cdefs.h
+src-header ${incdir}/sys/dir.h
+src-header ${incdir}/sys/file.h
+src-header ${incdir}/sys/ioctl.h
+src-header ${incdir}/sys/mman.h
+src-header ${incdir}/sys/param.h
+src-header ${incdir}/sys/resource.h
+src-header ${incdir}/sys/select.h
+src-header ${incdir}/sys/stat.h
+src-header ${incdir}/sys/timeb.h
+src-header ${incdir}/sys/time.h
+src-header ${incdir}/sys/times.h
+src-header ${incdir}/sys/types.h
+src-header ${incdir}/sys/ucontext.h
+src-header ${incdir}/sys/user.h
+src-header ${incdir}/sys/wait.h

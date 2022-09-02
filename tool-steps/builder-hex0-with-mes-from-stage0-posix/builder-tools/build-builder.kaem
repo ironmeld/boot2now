@@ -1,0 +1,7 @@
+kaem --verbose --strict --file build-builder-stage0-posix-srcs.kaem
+
+cd ..
+src-header x86/bin/builder-hex0.bin
+src-header x86/bin/src-header
+kaem --verbose --strict --file builder-tools/build-builder-mes-srcs.kaem
+kaem --verbose --strict --file builder-tools/build-builder-mes-cmds.kaem

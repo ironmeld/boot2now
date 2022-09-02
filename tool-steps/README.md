@@ -7,7 +7,7 @@ For an automated example of this process, see the Makefile in each directory.
 
 The following is the list of tool steps:
 
-## builder-hex0-M2
+## builder-hex0-with-stage0-posix
 
 The builder-hex0 boot kernel/compiler is combined with the stage0-posix compilers to produce an image with:
 
@@ -37,3 +37,10 @@ The builder-hex0 boot kernel/compiler is combined with the stage0-posix compiler
 * And these tools for creating a new builder image:
   * The builder-hex0 boot kernel in the file `builder-hex0.bin`
   * A utility named `x86/bin/src-header` for producing src headers
+
+
+## builder-hex0-with-mes-from-stage0-posix
+
+This image contains all of the functionality of the stage0-posix image and also includes the following executables:
+
+* mes (and support files)
