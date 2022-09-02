@@ -7,7 +7,7 @@ BUILD/builder-hex0.bin: ../builder-hex0-mini/BUILD/builder-hex0-mini.bin $(MODUL
 		../$(MODULESDIR)/builder-hex0/build-mini.sh \
 		../$< \
 		../$(MODULESDIR)/builder-hex0/builder-hex0.hex0 \
-		3072 \
+		3584 \
 		builder-hex0.bin)
 
 ../builder-hex0-mini/BUILD/builder-hex0-mini.bin:
