@@ -1,0 +1,11 @@
+kaem --verbose --strict --file ./build-builder-stage0-posix-srcs.kaem
+src-header /x86/bin/builder-hex0.bin
+src-header /x86/bin/src-header
+kaem --verbose --strict --file build-builder-stage0-posix-cmds.kaem
+
+cd ..
+kaem --verbose --strict --file builder-tools/build-builder-mes-srcs.kaem
+kaem --verbose --strict --file builder-tools/build-builder-mes-cmds.kaem
+kaem --verbose --strict --file builder-tools/build-builder-tcc-srcs.kaem
+kaem --verbose --strict --file builder-tools/build-builder-tcc-cmds.kaem
+catm /dev/hda x86-bin M2libc mescc tcc

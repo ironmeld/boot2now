@@ -44,3 +44,10 @@ The builder-hex0 boot kernel/compiler is combined with the stage0-posix compiler
 This image contains all of the functionality of the stage0-posix image and also includes the following executables:
 
 * mes (and support files)
+
+
+## builder-hex0-with-tcc-from-mes
+
+This image contains all of the functionality of the mes image and also includes the following executables:
+
+* tcc (and support files)

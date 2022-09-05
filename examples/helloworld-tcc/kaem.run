@@ -1,0 +1,32 @@
+M2LIBC_PATH=./M2libc
+PATH=/usr/bin
+
+tcc -g -v -static -o helloworld \
+    -D BOOTSTRAP=1 \
+    -D HAVE_BITFIELD=1 \
+    -D HAVE_FLOAT=1 \
+    -D HAVE_LONG_LONG=1 \
+    -D HAVE_SETJMP=1 \
+    -I . \
+    -I /usr/include \
+    -D TCC_TARGET_I386=1 \
+    -D CONFIG_TCCDIR="/usr/lib/mes/tcc" \
+    -D CONFIG_TCC_CRTPREFIX="/usr/lib/mes" \
+    -D CONFIG_TCC_ELFINTERP="/mes/loader" \
+    -D CONFIG_TCC_LIBPATHS="/usr/lib/mes:/usr/lib/mes/tcc" \
+    -D CONFIG_TCC_SYSINCLUDEPATHS="/usr/include" \
+    -D TCC_LIBGCC="/usr/lib/mes/libc.a" \
+    -D TCC_LIBTCC1="libtcc1.a" \
+    -D CONFIG_TCCBOOT=1 \
+    -D CONFIG_TCC_STATIC=1 \
+    -D CONFIG_USE_LIBGCC=1 \
+    -D TCC_MES_LIBC=1 \
+    -D TCC_VERSION="0.9.26" \
+    -D ONE_SOURCE=1 \
+    -L . \
+    helloworld.c
+
+./helloworld
+
+# make helloworld the build artifact
+/x86/bin/catm /dev/hda ./helloworld

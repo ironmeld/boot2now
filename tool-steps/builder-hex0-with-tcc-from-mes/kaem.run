@@ -1,0 +1,63 @@
+ARCH_DIR="x86"
+ARCH="x86"
+ARCH_DIR="x86"
+M2LIBC="M2libc"
+TOOLS="${ARCH_DIR}/bin"
+BLOOD_FLAG=" "
+BASE_ADDRESS="0x08048000"
+ENDIAN_FLAG="--little-endian"
+BINDIR="${ARCH_DIR}/bin"
+BUILDDIR="${ARCH_DIR}/artifact"
+
+M2LIBC_PATH=M2libc
+PATH=/x86/bin
+
+M2-Mesoplanet --architecture x86 -f simple-patch.c -o /x86/bin/simple-patch
+
+sysa="/sysa"
+distfiles=${sysa}/distfiles
+NYACC_PKG=nyacc-1.00.2
+MES_PKG=mes-0.24
+MES_PKG_DIR=mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037
+MES_PREFIX=${sysa}/${MES_PKG}/build/${MES_PKG_DIR}
+
+ungz --file rootfs.tar.gz --output rootfs.tar
+untar --file rootfs.tar
+
+mkdir sysa/mes-0.24/build
+cd sysa/mes-0.24/build
+
+ungz --file ${distfiles}/${NYACC_PKG}.tar.gz --output ${NYACC_PKG}.tar
+untar --file ${NYACC_PKG}.tar
+
+ungz --file ${distfiles}/${MES_PKG}.tar.gz --output ${MES_PKG}.tar
+untar --non-strict --file ${MES_PKG}.tar
+
+/x86/bin/simple-patch /sysa/mes-0.24/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/m2/lib.h \
+    /mes-increase-files.before /mes-increase-files.after
+/x86/bin/simple-patch /sysa/mes-0.24/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/mes/constants.h \
+    /mes-increase-files.before /mes-increase-files.after
+/x86/bin/simple-patch /sysa/mes-0.24/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/mes/lib.h \
+    /mes-increase-files.before /mes-increase-files.after
+
+
+cd ${MES_PREFIX}
+  
+# Remove pregenerated files
+rm mes/module/mes/psyntax.pp mes/module/mes/psyntax.pp.header
+  
+# These files are symlinked in the repo
+cp mes/module/srfi/srfi-9-struct.mes mes/module/srfi/srfi-9.mes
+cp mes/module/srfi/srfi-9/gnu-struct.mes mes/module/srfi/srfi-9/gnu.mes
+
+mkdir sysa/mes-0.24/build
+cd sysa/mes-0.24/build
+ungz --file /sysa/distfiles/mes-0.24.tar.gz --output mes-0.24.tar
+untar --verbose  --non-strict --file mes-0.24.tar
+
+
+cd /
+UPDATE_CHECKSUMS=True
+kaem --verbose --strict --file ./after.kaem
+cd ../builder-tools
+../${ARCH_DIR}/bin/kaem --verbose --strict --file ./build-builder.kaem

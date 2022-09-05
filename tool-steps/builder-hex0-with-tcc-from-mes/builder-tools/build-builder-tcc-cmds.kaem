@@ -1,0 +1,11 @@
+prefix=/usr
+bindir=${prefix}/bin
+
+catm tcc \
+  ${bindir}/tcc.src ${bindir}/tcc \
+  /usr/lib/mes/libc.a.src /usr/lib/mes/libc.a \
+  /usr/lib/mes/libgetopt.a.src /usr/lib/mes/libgetopt.a \
+  /usr/lib/mes/crt1.o.src /usr/lib/mes/crt1.o \
+  /usr/lib/mes/crti.o.src /usr/lib/mes/crti.o \
+  /usr/lib/mes/crtn.o.src /usr/lib/mes/crtn.o \
+  /usr/lib/mes/tcc/libtcc1.a.src /usr/lib/mes/tcc/libtcc1.a
