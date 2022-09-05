@@ -1,2 +1,3 @@
+PATH=/x86/bin
 cd builder-tools
-../x86/bin/kaem --verbose --strict --file ./build-builder.kaem
+kaem --verbose --strict --file ./build-builder.kaem

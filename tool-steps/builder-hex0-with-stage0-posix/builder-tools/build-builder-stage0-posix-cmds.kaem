@@ -1,7 +1,6 @@
 cd ..
-PATH=x86/bin
 
-catm /dev/hda \
+catm x86-bin \
   x86/bin/builder-hex0.bin \
   x86/bin/builder-hex0.bin.src x86/bin/builder-hex0.bin \
   x86/bin/src-header.src x86/bin/src-header \
@@ -21,7 +20,9 @@ catm /dev/hda \
   x86/bin/rm.src x86/bin/rm \
   x86/bin/sha256sum.src x86/bin/sha256sum \
   x86/bin/ungz.src x86/bin/ungz \
-  x86/bin/untar.src x86/bin/untar \
+  x86/bin/untar.src x86/bin/untar
+
+catm M2libc \
   M2-Planet/cc.h.src M2-Planet/cc.h \
   M2libc/sys/types.h.src M2libc/sys/types.h \
   M2libc/gcc_req.h.src M2libc/gcc_req.h \
@@ -67,5 +68,5 @@ catm /dev/hda \
   tmp.src \
   x86.src \
   x86/artifact.src \
-  mescc-tools-extra \
-  builder-tools
+  mescc-tools-extra.src \
+  builder-tools.src

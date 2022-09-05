@@ -1,3 +1,5 @@
-../x86/bin/kaem --verbose --strict --file ./build-builder-utils.kaem
-../x86/bin/kaem --verbose --strict --file ./build-builder-stage0-posix-srcs.kaem
-../x86/bin/kaem --verbose --strict --file ./build-builder-stage0-posix-cmds.kaem
+kaem --verbose --strict --file ./build-builder-utils.kaem
+kaem --verbose --strict --file ./build-builder-stage0-posix-srcs.kaem
+kaem --verbose --strict --file ./build-builder-stage0-posix-cmds.kaem
+cd ..
+catm /dev/hda x86-bin M2libc
