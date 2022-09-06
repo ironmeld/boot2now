@@ -14,6 +14,11 @@ PATH=/x86/bin
 
 M2-Mesoplanet --architecture x86 -f simple-patch.c -o /x86/bin/simple-patch
 
+# This tcc build is based on a builder that is prepopulated with the mes
+# binaries that have been built from source.
+# The following extraction of the mes and nyacc tar files are used to also
+# populate the support files that are extracted as part of building mes
+# because these files are also needed to build tcc.
 sysa="/sysa"
 distfiles=${sysa}/distfiles
 NYACC_PKG=nyacc-1.00.2
@@ -40,24 +45,20 @@ untar --non-strict --file ${MES_PKG}.tar
 /x86/bin/simple-patch /sysa/mes-0.24/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/mes/lib.h \
     /mes-increase-files.before /mes-increase-files.after
 
-
 cd ${MES_PREFIX}
-  
+
 # Remove pregenerated files
 rm mes/module/mes/psyntax.pp mes/module/mes/psyntax.pp.header
-  
+
 # These files are symlinked in the repo
 cp mes/module/srfi/srfi-9-struct.mes mes/module/srfi/srfi-9.mes
 cp mes/module/srfi/srfi-9/gnu-struct.mes mes/module/srfi/srfi-9/gnu.mes
 
-mkdir sysa/mes-0.24/build
-cd sysa/mes-0.24/build
-ungz --file /sysa/distfiles/mes-0.24.tar.gz --output mes-0.24.tar
-untar --verbose  --non-strict --file mes-0.24.tar
-
-
+# Now, launch live-bootstrap to build tcc.
 cd /
 UPDATE_CHECKSUMS=True
 kaem --verbose --strict --file ./after.kaem
+
+# Now, build a builder image with tcc.
 cd ../builder-tools
 ../${ARCH_DIR}/bin/kaem --verbose --strict --file ./build-builder.kaem
