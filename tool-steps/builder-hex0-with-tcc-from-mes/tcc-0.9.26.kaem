@@ -26,7 +26,16 @@ ungz --file ${distfiles}/${MES_PKG}.tar.gz --output ${MES_PKG}.tar
 cd ..
 
 cd build
+# This mkdir is a work-around for the fact that the untar from stage-posix
+# does not appear to automatically create the top level directory for the
+# tar files if it does not exist.
+mkdir ${TCC_PKG}
 untar --file ../src/${TCC_TAR}.tar
+/x86/bin/simple-patch /sysa/tcc-0.9.26/build/tcc-0.9.26-1136-g5bba73cc/tcctools.c \
+    /remove-fileopen.before /remove-fileopen.after
+/x86/bin/simple-patch /sysa/tcc-0.9.26/build/tcc-0.9.26-1136-g5bba73cc/tcctools.c \
+    /addback-fileopen.before /addback-fileopen.after
+
 untar --non-strict --file ../src/${MES_PKG}.tar
 /x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/m2/lib.h \
     /mes-increase-files.before /mes-increase-files.after
