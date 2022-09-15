@@ -9,7 +9,7 @@ BUILD/builder-hex0-with-tcc.bin: ../builder-hex0-with-mes-from-stage0-posix/BUIL
 BUILD/builder-hex0-with-tcc.src: BUILD/tcc.src BUILD/builder-tcc-srcs.src
 	# Add src and scripts for tcc executables and support files
 	cp BUILD/tcc.src $@
-	# Add src and commands for builder-tcc-ms
+	# Add src and commands for builder-hex0-with-tcc
 	cat BUILD/builder-tcc-srcs.src >> $@
 	cat tcc-and-builder-cmds.src >> $@
 

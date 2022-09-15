@@ -1,4 +1,4 @@
-The following commands were used to retrive the source packages.
+The following commands were used to retrieve the source packages.
 See modules/live-bootstrap/sysa.py for more information.
 
 ```

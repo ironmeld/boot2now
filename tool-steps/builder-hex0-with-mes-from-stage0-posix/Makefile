@@ -9,7 +9,7 @@ BUILD/builder-hex0-with-mes.bin: ../builder-hex0-with-stage0-posix/BUILD/builder
 BUILD/builder-hex0-with-mes.src: BUILD/mes.src BUILD/builder-mes-srcs.src
 	# Add src and scripts for mes executables and support files
 	cp BUILD/mes.src $@
-	# Add src and commands for builder-mes-ms
+	# Add src and commands for builder-hex0-with-mes
 	cat BUILD/builder-mes-srcs.src >> $@
 	cat mes-and-builder-cmds.src >> $@
 
