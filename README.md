@@ -1,6 +1,9 @@
 # Boot2Now
 
-This project combines the [builder-hex0](https://github.com/ironmeld/builder-hex0) bootstrap kernel with the bootstrap compilers from the [stage0-posix](https://github.com/oriansj/stage0-posix) project in order to bootstrap a C (subset) compiler *entirely* from hex files.
+This project combines the [builder-hex0](https://github.com/ironmeld/builder-hex0) bootstrap
+kernel with the bootstrap compilers source code from the [stage0-posix](https://github.com/oriansj/stage0-posix) and
+[live-bootstrap](https://github.com/fosslinux/live-bootstrap) projects in order to bootstrap the tcc compiler,
+starting *entirely* from hex files.
 
 ## Minimal Bootstrapping
 
