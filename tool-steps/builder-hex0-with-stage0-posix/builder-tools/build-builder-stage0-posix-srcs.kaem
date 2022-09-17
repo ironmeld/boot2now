@@ -17,6 +17,7 @@ src-header x86/bin/rm
 src-header x86/bin/sha256sum
 src-header x86/bin/ungz
 src-header x86/bin/untar
+src-header x86/bin/replace
 
 src-header M2-Planet/cc.h
 src-header M2libc/sys/types.h

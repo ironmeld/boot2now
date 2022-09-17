@@ -20,7 +20,8 @@ catm x86-bin \
   x86/bin/rm.src x86/bin/rm \
   x86/bin/sha256sum.src x86/bin/sha256sum \
   x86/bin/ungz.src x86/bin/ungz \
-  x86/bin/untar.src x86/bin/untar
+  x86/bin/untar.src x86/bin/untar \
+  x86/bin/replace.src x86/bin/replace
 
 catm M2libc \
   M2-Planet/cc.h.src M2-Planet/cc.h \

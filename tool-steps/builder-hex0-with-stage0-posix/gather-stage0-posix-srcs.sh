@@ -76,6 +76,7 @@ for src in \
     mescc-tools-extra/cp.c \
     mescc-tools-extra/chmod.c \
     mescc-tools-extra/rm.c \
+    mescc-tools-extra/replace.c \
     M2libc/string.h \
     M2libc/string.c \
     M2libc/stdio.h \
