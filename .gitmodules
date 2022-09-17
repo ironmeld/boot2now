@@ -1,9 +1,6 @@
 [submodule "modules/builder-hex0"]
 	path = modules/builder-hex0
 	url = https://github.com/ironmeld/builder-hex0.git
-[submodule "modules/stage0-posix"]
-	path = modules/stage0-posix
-	url = https://github.com/oriansj/stage0-posix.git
 [submodule "modules/live-bootstrap"]
 	path = modules/live-bootstrap
 	url = https://github.com/fosslinux/live-bootstrap.git

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+MODULESDIR=../../modules
+STAGE0POSIX=${MODULESDIR}/live-bootstrap/sysa/stage0-posix/src
+
 for src in \
     bootstrap-seeds/POSIX/x86/hex0_x86.hex0 \
     bootstrap-seeds/POSIX/x86/kaem-minimal.hex0 \
@@ -100,8 +103,8 @@ for src in \
     x86.answers \
     after.kaem
 do
-    echo "src $(cd ../../modules/stage0-posix; wc -c $src)"
-    cat ../../modules/stage0-posix/$src
+    echo "src $(cd ${STAGE0POSIX}; wc -c $src)"
+    cat ${STAGE0POSIX}/$src
 done
 echo "src 0 /"
 echo "src 0 x86"
