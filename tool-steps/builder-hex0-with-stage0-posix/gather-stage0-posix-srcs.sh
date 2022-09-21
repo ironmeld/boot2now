@@ -4,6 +4,42 @@ set -euo pipefail
 MODULESDIR=../../modules
 STAGE0POSIX=${MODULESDIR}/live-bootstrap/sysa/stage0-posix/src
 
+echo "src 0 /"
+echo "src 0 /bootstrap-seeds"
+echo "src 0 /bootstrap-seeds/POSIX"
+echo "src 0 /bootstrap-seeds/POSIX/x86"
+echo "src 0 /x86"
+echo "src 0 /x86/artifact"
+echo "src 0 /x86/bin"
+echo "src 0 /mescc-tools"
+echo "src 0 /M2libc"
+echo "src 0 /M2libc/x86"
+echo "src 0 /M2libc/x86/linux"
+echo "src 0 /M2libc/x86/linux/sys"
+echo "src 0 /M2-Planet"
+echo "src 0 /M2libc"
+echo "src 0 /M2libc/sys"
+echo "src 0 /M2libc/amd64"
+echo "src 0 /M2libc/amd64/linux"
+echo "src 0 /M2libc/amd64/linux/sys"
+echo "src 0 /M2libc/armv7l"
+echo "src 0 /M2libc/armv7l/linux"
+echo "src 0 /M2libc/armv7l/linux/sys"
+echo "src 0 /M2libc/aarch64"
+echo "src 0 /M2libc/aarch64/linux"
+echo "src 0 /M2libc/aarch64/linux/sys"
+echo "src 0 /M2libc/riscv32"
+echo "src 0 /M2libc/riscv32/linux"
+echo "src 0 /M2libc/riscv32/linux/sys"
+echo "src 0 /M2libc/riscv64"
+echo "src 0 /M2libc/riscv64/linux"
+echo "src 0 /M2libc/riscv64/linux/sys"
+echo "src 0 /mescc-tools/Kaem"
+echo "src 0 /mescc-tools-extra"
+echo "src 0 /M2-Mesoplanet"
+echo "src 0 /builder-tools"
+echo "src 0 /dev"
+
 for src in \
     bootstrap-seeds/POSIX/x86/hex0_x86.hex0 \
     bootstrap-seeds/POSIX/x86/kaem-minimal.hex0 \
@@ -107,9 +143,3 @@ do
     echo "src $(cd ${STAGE0POSIX}; wc -c $src)"
     cat ${STAGE0POSIX}/$src
 done
-echo "src 0 /"
-echo "src 0 x86"
-echo "src 0 x86/artifact"
-echo "src 0 mescc-tools-extra"
-echo "src 0 builder-tools"
-echo "src 0 mescc-tools-extra"

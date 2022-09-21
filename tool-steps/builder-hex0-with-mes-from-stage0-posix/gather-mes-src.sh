@@ -21,6 +21,7 @@ cat rootfs.tar.gz
 )
 
 # distfiles are separate because untar has trouble with the mes and nyacc tar files
+echo "src 0 sysa"
 echo "src 0 sysa/distfiles"
 mkdir BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/mes-0.24.tar.gz BUILD/rootfs/sysa/distfiles

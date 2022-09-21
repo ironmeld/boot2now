@@ -8,4 +8,4 @@ kaem --verbose --strict --file builder-tools/build-builder-mes-srcs.kaem
 kaem --verbose --strict --file builder-tools/build-builder-mes-cmds.kaem
 kaem --verbose --strict --file builder-tools/build-builder-tcc-srcs.kaem
 kaem --verbose --strict --file builder-tools/build-builder-tcc-cmds.kaem
-catm /dev/hda x86-bin M2libc mescc tcc
+catm /dev/hda x86/bin/builder-hex0.bin stage0-dirs x86-bin M2libc mescc tcc

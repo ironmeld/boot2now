@@ -1,7 +1,40 @@
 cd ..
+catm stage0-dirs \
+  /.src \
+  /tmp.src \
+  /x86.src \
+  /x86/artifact.src \
+  /x86/bin.src \
+  /mescc-tools.src \
+  /M2libc.src \
+  /M2libc/x86.src \
+  /M2libc/x86/linux.src \
+  /M2libc/x86/linux/sys.src \
+  /M2-Planet.src \
+  /M2libc.src \
+  /M2libc/sys.src \
+  /M2libc/amd64.src \
+  /M2libc/amd64/linux.src \
+  /M2libc/amd64/linux/sys.src \
+  /M2libc/armv7l.src \
+  /M2libc/armv7l/linux.src \
+  /M2libc/armv7l/linux/sys.src \
+  /M2libc/aarch64.src \
+  /M2libc/aarch64/linux.src \
+  /M2libc/aarch64/linux/sys.src \
+  /M2libc/riscv32.src \
+  /M2libc/riscv32/linux.src \
+  /M2libc/riscv32/linux/sys.src \
+  /M2libc/riscv64.src \
+  /M2libc/riscv64/linux.src \
+  /M2libc/riscv64/linux/sys.src \
+  /mescc-tools/Kaem.src \
+  /mescc-tools-extra.src \
+  /M2-Mesoplanet.src \
+  /builder-tools.src \
+  /dev.src
 
 catm x86-bin \
-  x86/bin/builder-hex0.bin \
   x86/bin/builder-hex0.bin.src x86/bin/builder-hex0.bin \
   x86/bin/src-header.src x86/bin/src-header \
   x86/bin/sha256sum.src x86/bin/sha256sum \
@@ -64,10 +97,4 @@ catm M2libc \
   M2libc/x86/x86_defs.M1.src M2libc/x86/x86_defs.M1 \
   M2libc/x86/libc-full.M1.src M2libc/x86/libc-full.M1 \
   M2libc/x86/ELF-x86.hex2.src M2libc/x86/ELF-x86.hex2 \
-  M2libc/x86/ELF-x86-debug.hex2.src M2libc/x86/ELF-x86-debug.hex2 \
-  /.src \
-  tmp.src \
-  x86.src \
-  x86/artifact.src \
-  mescc-tools-extra.src \
-  builder-tools.src
+  M2libc/x86/ELF-x86-debug.hex2.src M2libc/x86/ELF-x86-debug.hex2

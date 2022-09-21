@@ -2,4 +2,4 @@ kaem --verbose --strict --file ./build-builder-utils.kaem
 kaem --verbose --strict --file ./build-builder-stage0-posix-srcs.kaem
 kaem --verbose --strict --file ./build-builder-stage0-posix-cmds.kaem
 cd ..
-catm /dev/hda x86-bin M2libc
+catm /dev/hda x86/bin/builder-hex0.bin stage0-dirs x86-bin M2libc

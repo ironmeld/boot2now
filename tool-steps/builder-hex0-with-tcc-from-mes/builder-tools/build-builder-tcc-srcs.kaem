@@ -1,7 +1,9 @@
 src-header /usr/bin/tcc
+src-header /usr/lib/mes
 src-header /usr/lib/mes/libc.a
 src-header /usr/lib/mes/libgetopt.a
 src-header /usr/lib/mes/crt1.o
 src-header /usr/lib/mes/crti.o
 src-header /usr/lib/mes/crtn.o
+src-header /usr/lib/mes/tcc
 src-header /usr/lib/mes/tcc/libtcc1.a

@@ -5,9 +5,13 @@ libdir=${prefix}/lib
 incdir=${prefix}/include
 srcdir=${prefix}/src
 
+src-header ${prefix}
+src-header ${bindir}
 src-header ${bindir}/mes
 src-header ${bindir}/mescc.scm
 
+src-header ${libdir}
+src-header ${libdir}/x86-mes
 src-header ${libdir}/x86-mes/libmescc.a
 src-header ${libdir}/x86-mes/libmescc.s
 
@@ -20,9 +24,13 @@ src-header ${libdir}/x86-mes/libc+tcc.s
 src-header ${libdir}/x86-mes/x86.M1
 src-header ${libdir}/x86-mes/crt1.o
 src-header ${libdir}/x86-mes/crt1.s
+
+src-header ${libdir}/linux
+src-header ${libdir}/linux/x86-mes
 src-header ${libdir}/linux/x86-mes/elf32-footer-single-main.hex2
 src-header ${libdir}/linux/x86-mes/elf32-header.hex2
 
+src-header ${incdir}
 src-header ${incdir}/alloca.h
 src-header ${incdir}/argz.h
 src-header ${incdir}/ar.h
@@ -60,9 +68,12 @@ src-header ${incdir}/termio.h
 src-header ${incdir}/time.h
 src-header ${incdir}/unistd.h
 
+src-header ${incdir}/linux
 src-header ${incdir}/linux/syscall.h
+src-header ${incdir}/linux/x86
 src-header ${incdir}/linux/x86/syscall.h
 
+src-header ${incdir}/mes
 src-header ${incdir}/mes/builtins.h
 src-header ${incdir}/mes/cc.h
 src-header ${incdir}/mes/config.h
@@ -72,6 +83,7 @@ src-header ${incdir}/mes/lib-mini.h
 src-header ${incdir}/mes/mes.h
 src-header ${incdir}/mes/symbols.h
 
+src-header ${incdir}/sys
 src-header ${incdir}/sys/cdefs.h
 src-header ${incdir}/sys/dir.h
 src-header ${incdir}/sys/file.h

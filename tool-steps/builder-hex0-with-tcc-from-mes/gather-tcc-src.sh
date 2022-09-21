@@ -31,6 +31,7 @@ cp ../../distfiles/mes-0.24.tar.gz BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/nyacc-1.00.2.tar.gz BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/tcc-0.9.26.tar.gz BUILD/rootfs/sysa/distfiles
 (
+echo "src 0 sysa"
 echo "src 0 sysa/distfiles"
 cd BUILD/rootfs
 echo "src $(wc -c sysa/distfiles/mes-0.24.tar.gz)"

@@ -6,12 +6,18 @@ incdir=${prefix}/include
 srcdir=${prefix}/src
 
 catm mescc \
+  ${prefix}.src \
+  ${bindir}.src \
   ${bindir}/mescc.scm.src ${bindir}/mescc.scm \
+  ${libdir}.src \
+  ${libdir}/x86-mes.src \
   ${libdir}/x86-mes/libc.a.src ${libdir}/x86-mes/libc.a \
   ${libdir}/x86-mes/libc.s.src ${libdir}/x86-mes/libc.s \
   ${libdir}/x86-mes/libc+tcc.a.src ${libdir}/x86-mes/libc+tcc.a \
   ${libdir}/x86-mes/libc+tcc.s.src ${libdir}/x86-mes/libc+tcc.s \
   ${bindir}/mes.src ${bindir}/mes \
+  ${prefix}/lib.src \
+  ${prefix}/lib/x86-mes.src \
   ${prefix}/lib/x86-mes/libc.a.src ${prefix}/lib/x86-mes/libc.a \
   ${prefix}/lib/x86-mes/libc+tcc.a.src ${prefix}/lib/x86-mes/libc+tcc.a \
   ${prefix}/lib/x86-mes/libmescc.a.src ${prefix}/lib/x86-mes/libmescc.a \
@@ -21,8 +27,11 @@ catm mescc \
   ${prefix}/lib/x86-mes/x86.M1.src ${prefix}/lib/x86-mes/x86.M1 \
   ${prefix}/lib/x86-mes/crt1.o.src ${prefix}/lib/x86-mes/crt1.o \
   ${prefix}/lib/x86-mes/crt1.s.src ${prefix}/lib/x86-mes/crt1.s \
+  ${prefix}/lib/linux.src \
+  ${prefix}/lib/linux/x86-mes.src \
   ${prefix}/lib/linux/x86-mes/elf32-footer-single-main.hex2.src ${prefix}/lib/linux/x86-mes/elf32-footer-single-main.hex2 \
   ${prefix}/lib/linux/x86-mes/elf32-header.hex2.src ${prefix}/lib/linux/x86-mes/elf32-header.hex2 \
+  ${incdir}.src \
   ${incdir}/alloca.h.src ${incdir}/alloca.h \
   ${incdir}/argz.h.src ${incdir}/argz.h \
   ${incdir}/ar.h.src ${incdir}/ar.h \
@@ -59,8 +68,11 @@ catm mescc \
   ${incdir}/termio.h.src ${incdir}/termio.h \
   ${incdir}/time.h.src ${incdir}/time.h \
   ${incdir}/unistd.h.src ${incdir}/unistd.h \
+  ${incdir}/linux.src \
+  ${incdir}/linux/x86.src \
   ${incdir}/linux/syscall.h.src ${incdir}/linux/syscall.h \
   ${incdir}/linux/x86/syscall.h.src ${incdir}/linux/x86/syscall.h \
+  ${incdir}/mes.src \
   ${incdir}/mes/builtins.h.src ${incdir}/mes/builtins.h \
   ${incdir}/mes/cc.h.src ${incdir}/mes/cc.h \
   ${incdir}/mes/config.h.src ${incdir}/mes/config.h \
@@ -69,6 +81,7 @@ catm mescc \
   ${incdir}/mes/lib-mini.h.src ${incdir}/mes/lib-mini.h \
   ${incdir}/mes/mes.h.src ${incdir}/mes/mes.h \
   ${incdir}/mes/symbols.h.src ${incdir}/mes/symbols.h \
+  ${incdir}/sys.src \
   ${incdir}/sys/cdefs.h.src ${incdir}/sys/cdefs.h \
   ${incdir}/sys/dir.h.src ${incdir}/sys/dir.h \
   ${incdir}/sys/file.h.src ${incdir}/sys/file.h \

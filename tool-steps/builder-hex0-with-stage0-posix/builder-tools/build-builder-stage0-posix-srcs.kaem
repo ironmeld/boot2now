@@ -1,6 +1,40 @@
 cd ..
 PATH=x86/bin
 
+src-header /
+src-header tmp
+src-header /x86
+src-header /x86/artifact
+src-header /x86/bin
+src-header /mescc-tools
+src-header /M2libc
+src-header /M2libc/x86
+src-header /M2libc/x86/linux
+src-header /M2libc/x86/linux/sys
+src-header /M2-Planet
+src-header /M2libc
+src-header /M2libc/sys
+src-header /M2libc/amd64
+src-header /M2libc/amd64/linux
+src-header /M2libc/amd64/linux/sys
+src-header /M2libc/armv7l
+src-header /M2libc/armv7l/linux
+src-header /M2libc/armv7l/linux/sys
+src-header /M2libc/aarch64
+src-header /M2libc/aarch64/linux
+src-header /M2libc/aarch64/linux/sys
+src-header /M2libc/riscv32
+src-header /M2libc/riscv32/linux
+src-header /M2libc/riscv32/linux/sys
+src-header /M2libc/riscv64
+src-header /M2libc/riscv64/linux
+src-header /M2libc/riscv64/linux/sys
+src-header /mescc-tools/Kaem
+src-header /mescc-tools-extra
+src-header /M2-Mesoplanet
+src-header /builder-tools
+src-header /dev
+
 src-header x86/bin/blood-elf
 src-header x86/bin/catm
 src-header x86/bin/chmod
@@ -60,9 +94,3 @@ src-header M2libc/x86/x86_defs.M1
 src-header M2libc/x86/libc-full.M1
 src-header M2libc/x86/ELF-x86.hex2
 src-header M2libc/x86/ELF-x86-debug.hex2
-src-header /
-src-header tmp
-src-header x86
-src-header x86/artifact
-src-header mescc-tools-extra
-src-header builder-tools
