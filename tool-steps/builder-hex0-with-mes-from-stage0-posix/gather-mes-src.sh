@@ -36,8 +36,11 @@ cat sysa/distfiles/nyacc-1.00.2.tar.gz
 
 echo "src 0 /sysa/bootstrap.cfg"
 
+(
+cd ../../utils
 echo "src $(wc -c simple-patch.c)"
 cat simple-patch.c
+)
 
 (
 cd patches
