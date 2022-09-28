@@ -44,9 +44,11 @@ cat sysa/distfiles/tcc-0.9.26.tar.gz
 
 echo "src 0 /sysa/bootstrap.cfg"
 
-
+(
+cd ../../utils
 echo "src $(wc -c simple-patch.c)"
 cat simple-patch.c
+)
 
 (
 cd patches
