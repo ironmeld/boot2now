@@ -1,0 +1,9 @@
+untar --non-strict --file ../src/${MES_PKG}.tar # ignore symlinks
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/kaem.run \
+    /mes-kaem.run-base-address.before /mes-kaem.run-base-address.after
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/m2/lib.h \
+    /mes-increase-files.before /mes-increase-files.after 
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/mes/constants.h \
+    /mes-increase-files.before /mes-increase-files.after 
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/mes/lib.h \
+    /mes-increase-files.before /mes-increase-files.after 

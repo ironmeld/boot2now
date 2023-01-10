@@ -22,15 +22,15 @@ M2-Mesoplanet --architecture x86 -f simple-patch.c -o /x86/bin/simple-patch
 sysa="/sysa"
 distfiles=${sysa}/distfiles
 NYACC_PKG=nyacc-1.00.2
-MES_PKG=mes-0.24
-MES_PKG_DIR=mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037
+MES_PKG=mes-0.24.1
+MES_PKG_DIR=${MES_PKG}
 MES_PREFIX=${sysa}/${MES_PKG}/build/${MES_PKG_DIR}
 
 ungz --file rootfs.tar.gz --output rootfs.tar
 untar --file rootfs.tar
 
-mkdir sysa/mes-0.24/build
-cd sysa/mes-0.24/build
+mkdir sysa/mes-0.24.1/build
+cd sysa/mes-0.24.1/build
 
 ungz --file ${distfiles}/${NYACC_PKG}.tar.gz --output ${NYACC_PKG}.tar
 untar --file ${NYACC_PKG}.tar
@@ -38,11 +38,11 @@ untar --file ${NYACC_PKG}.tar
 ungz --file ${distfiles}/${MES_PKG}.tar.gz --output ${MES_PKG}.tar
 untar --non-strict --file ${MES_PKG}.tar
 
-/x86/bin/simple-patch /sysa/mes-0.24/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/m2/lib.h \
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/m2/lib.h \
     /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/mes-0.24/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/mes/constants.h \
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/mes/constants.h \
     /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/mes-0.24/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/mes/lib.h \
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/mes/lib.h \
     /mes-increase-files.before /mes-increase-files.after
 
 cd ${MES_PREFIX}

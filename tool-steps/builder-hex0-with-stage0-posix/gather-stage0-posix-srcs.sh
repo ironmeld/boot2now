@@ -34,6 +34,11 @@ echo "src 0 /M2libc/riscv32/linux/sys"
 echo "src 0 /M2libc/riscv64"
 echo "src 0 /M2libc/riscv64/linux"
 echo "src 0 /M2libc/riscv64/linux/sys"
+echo "src 0 /M2libc/knight"
+echo "src 0 /M2libc/knight/linux"
+echo "src 0 /M2libc/knight/native"
+echo "src 0 /M2libc/uefi"
+echo "src 0 /M2libc/uefi/sys"
 echo "src 0 /mescc-tools/Kaem"
 echo "src 0 /mescc-tools-extra"
 echo "src 0 /M2-Mesoplanet"
@@ -50,7 +55,7 @@ for src in \
     x86/mescc-tools-mini-kaem.kaem \
     x86/kaem.run \
     x86/hex1_x86.hex0 \
-    x86/catm_x86.hex0 \
+    x86/catm_x86.hex2 \
     x86/hex2_x86.hex1 \
     x86/ELF-i386.hex2 \
     x86/M0_x86.hex2 \
@@ -80,6 +85,7 @@ for src in \
     M2libc/x86/linux/unistd.c \
     M2libc/x86/linux/fcntl.c \
     M2libc/x86/linux/sys/stat.c \
+    M2libc/fcntl.c \
     M2libc/stdlib.c \
     M2libc/stdio.c \
     mescc-tools/hex2.h \
@@ -106,6 +112,7 @@ for src in \
     mescc-tools-extra/sha256sum.c \
     mescc-tools-extra/match.c \
     mescc-tools-extra/mkdir.c \
+    mescc-tools-extra/unbz2.c \
     mescc-tools-extra/untar.c \
     mescc-tools-extra/ungz.c \
     mescc-tools-extra/catm.c \
@@ -122,20 +129,29 @@ for src in \
     M2libc/aarch64/linux/sys/stat.c \
     M2libc/riscv32/linux/sys/stat.c \
     M2libc/riscv64/linux/sys/stat.c \
+    M2libc/uefi/sys/stat.c \
+    M2libc/uefi/uefi.c \
+    M2libc/uefi/string_p.h \
     M2libc/fcntl.h \
     M2libc/amd64/linux/fcntl.c \
     M2libc/armv7l/linux/fcntl.c \
     M2libc/aarch64/linux/fcntl.c \
     M2libc/riscv32/linux/fcntl.c \
     M2libc/riscv64/linux/fcntl.c \
+    M2libc/knight/linux/fcntl.c \
+    M2libc/knight/native/fcntl.c \
+    M2libc/uefi/fcntl.c \
     M2libc/unistd.h \
     M2libc/amd64/linux/unistd.c \
     M2libc/armv7l/linux/unistd.c \
     M2libc/aarch64/linux/unistd.c \
     M2libc/riscv32/linux/unistd.c \
     M2libc/riscv64/linux/unistd.c \
+    M2libc/uefi/unistd.c \
     M2libc/signal.h \
     M2libc/stdlib.h \
+    M2libc/ctype.h \
+    M2libc/ctype.c \
     M2libc/bootstrappable.h \
     x86.answers \
     after.kaem

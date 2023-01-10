@@ -33,11 +33,11 @@ untar --file ../src/${TCC_TAR}.tar
     /addback-fileopen.before /addback-fileopen.after
 
 untar --non-strict --file ../src/${MES_PKG}.tar
-/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/m2/lib.h \
+/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/include/m2/lib.h \
     /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/mes/constants.h \
+/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/include/mes/constants.h \
     /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-aa5f1533e1736a89e60d2c34c2a0ab3b01f8d037/include/mes/lib.h \
+/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/include/mes/lib.h \
     /mes-increase-files.before /mes-increase-files.after
 
 

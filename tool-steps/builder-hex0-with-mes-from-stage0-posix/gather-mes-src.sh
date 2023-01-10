@@ -6,9 +6,10 @@ cat kaem.run
 
 rm -rf BUILD/rootfs
 mkdir -p BUILD/rootfs/sysa
-cp -r ../../modules/live-bootstrap/sysa/mes-0.24 BUILD/rootfs/sysa
+cp ../../modules/live-bootstrap/sysa/checksum-transcriber.c BUILD/rootfs/sysa
+cp ../../modules/live-bootstrap/sysa/checksum-transcriber.SHA256SUM BUILD/rootfs/sysa
+cp -r ../../modules/live-bootstrap/sysa/mes-0.24.1 BUILD/rootfs/sysa
 cp sysa-run.kaem-mes-only BUILD/rootfs/sysa/run.kaem
-cp SHA256SUMS.sources BUILD/rootfs/sysa/
 cp ../../modules/live-bootstrap/sysa/after.kaem BUILD/rootfs
 
 (
@@ -24,12 +25,12 @@ cat rootfs.tar.gz
 echo "src 0 sysa"
 echo "src 0 sysa/distfiles"
 mkdir BUILD/rootfs/sysa/distfiles
-cp ../../distfiles/mes-0.24.tar.gz BUILD/rootfs/sysa/distfiles
+cp ../../distfiles/mes-0.24.1.tar.gz BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/nyacc-1.00.2.tar.gz BUILD/rootfs/sysa/distfiles
 (
 cd BUILD/rootfs
-echo "src $(wc -c sysa/distfiles/mes-0.24.tar.gz)"
-cat sysa/distfiles/mes-0.24.tar.gz
+echo "src $(wc -c sysa/distfiles/mes-0.24.1.tar.gz)"
+cat sysa/distfiles/mes-0.24.1.tar.gz
 echo "src $(wc -c sysa/distfiles/nyacc-1.00.2.tar.gz)"
 cat sysa/distfiles/nyacc-1.00.2.tar.gz
 )
@@ -49,15 +50,15 @@ cat mes-kaem.run-base-address.before
 echo "src $(wc -c mes-kaem.run-base-address.after)"
 cat mes-kaem.run-base-address.after
 
-echo "src $(wc -c mes-0.24.kaem-apply-patches.before)"
-cat mes-0.24.kaem-apply-patches.before
-echo "src $(wc -c mes-0.24.kaem-apply-patches.after)"
-cat mes-0.24.kaem-apply-patches.after
+echo "src $(wc -c mes-0.24.1.kaem-apply-patches.before)"
+cat mes-0.24.1.kaem-apply-patches.before
+echo "src $(wc -c mes-0.24.1.kaem-apply-patches.after)"
+cat mes-0.24.1.kaem-apply-patches.after
 
-echo "src $(wc -c mes-0.24.kaem-base-address.before)"
-cat mes-0.24.kaem-base-address.before
-echo "src $(wc -c mes-0.24.kaem-base-address.after)"
-cat mes-0.24.kaem-base-address.after
+echo "src $(wc -c mes-0.24.1.kaem-base-address.before)"
+cat mes-0.24.1.kaem-base-address.before
+echo "src $(wc -c mes-0.24.1.kaem-base-address.after)"
+cat mes-0.24.1.kaem-base-address.after
 
 echo "src $(wc -c mes-increase-files.before)"
 cat mes-increase-files.before

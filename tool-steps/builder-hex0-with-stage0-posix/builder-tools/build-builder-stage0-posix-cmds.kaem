@@ -28,6 +28,11 @@ catm stage0-dirs \
   /M2libc/riscv64.src \
   /M2libc/riscv64/linux.src \
   /M2libc/riscv64/linux/sys.src \
+  /M2libc/knight.src \
+  /M2libc/knight/linux.src \
+  /M2libc/knight/native.src \
+  /M2libc/uefi.src \
+  /M2libc/uefi/sys.src \
   /mescc-tools/Kaem.src \
   /mescc-tools-extra.src \
   /M2-Mesoplanet.src \
@@ -52,6 +57,7 @@ catm x86-bin \
   x86/bin/mkdir.src x86/bin/mkdir \
   x86/bin/rm.src x86/bin/rm \
   x86/bin/sha256sum.src x86/bin/sha256sum \
+  x86/bin/unbz2.src x86/bin/unbz2 \
   x86/bin/ungz.src x86/bin/ungz \
   x86/bin/untar.src x86/bin/untar \
   x86/bin/replace.src x86/bin/replace
@@ -72,20 +78,28 @@ catm M2libc \
   M2libc/aarch64/linux/sys/stat.c.src M2libc/aarch64/linux/sys/stat.c \
   M2libc/riscv32/linux/sys/stat.c.src M2libc/riscv32/linux/sys/stat.c \
   M2libc/riscv64/linux/sys/stat.c.src M2libc/riscv64/linux/sys/stat.c \
+  M2libc/uefi/sys/stat.c.src M2libc/uefi/sys/stat.c \
+  M2libc/uefi/uefi.c.src M2libc/uefi/uefi.c \
   M2libc/fcntl.h.src M2libc/fcntl.h \
   M2libc/amd64/linux/fcntl.c.src M2libc/amd64/linux/fcntl.c \
   M2libc/armv7l/linux/fcntl.c.src M2libc/armv7l/linux/fcntl.c \
   M2libc/aarch64/linux/fcntl.c.src M2libc/aarch64/linux/fcntl.c \
   M2libc/riscv32/linux/fcntl.c.src M2libc/riscv32/linux/fcntl.c \
   M2libc/riscv64/linux/fcntl.c.src M2libc/riscv64/linux/fcntl.c \
+  M2libc/knight/linux/fcntl.c.src M2libc/knight/linux/fcntl.c \
+  M2libc/knight/native/fcntl.c.src M2libc/knight/native/fcntl.c \
+  M2libc/uefi/fcntl.c.src M2libc/uefi/fcntl.c \
   M2libc/unistd.h.src M2libc/unistd.h \
   M2libc/amd64/linux/unistd.c.src M2libc/amd64/linux/unistd.c \
   M2libc/armv7l/linux/unistd.c.src M2libc/armv7l/linux/unistd.c \
   M2libc/aarch64/linux/unistd.c.src M2libc/aarch64/linux/unistd.c \
   M2libc/riscv32/linux/unistd.c.src M2libc/riscv32/linux/unistd.c \
   M2libc/riscv64/linux/unistd.c.src M2libc/riscv64/linux/unistd.c \
+  M2libc/uefi/unistd.c.src M2libc/uefi/unistd.c \
+  M2libc/uefi/string_p.h.src M2libc/uefi/string_p.h \
   M2libc/signal.h.src M2libc/signal.h \
   M2libc/stdlib.h.src M2libc/stdlib.h \
+  M2libc/ctype.h.src M2libc/ctype.h \
   M2libc/bootstrappable.h.src M2libc/bootstrappable.h \
   M2libc/bootstrappable.c.src M2libc/bootstrappable.c \
   M2libc/x86/linux/unistd.c.src M2libc/x86/linux/unistd.c \
@@ -94,6 +108,8 @@ catm M2libc \
   M2libc/stdlib.c.src M2libc/stdlib.c \
   M2libc/stdio.c.src M2libc/stdio.c \
   M2libc/string.c.src M2libc/string.c \
+  M2libc/fcntl.c.src M2libc/fcntl.c \
+  M2libc/ctype.c.src M2libc/ctype.c \
   M2libc/x86/x86_defs.M1.src M2libc/x86/x86_defs.M1 \
   M2libc/x86/libc-full.M1.src M2libc/x86/libc-full.M1 \
   M2libc/x86/ELF-x86.hex2.src M2libc/x86/ELF-x86.hex2 \

@@ -16,8 +16,8 @@ ungz --file rootfs.tar.gz --output rootfs.tar
 untar --file rootfs.tar
 
 M2-Mesoplanet --architecture x86 -f simple-patch.c -o /x86/bin/simple-patch
-simple-patch /sysa/mes-0.24/mes-0.24.kaem mes-0.24.kaem-apply-patches.before mes-0.24.kaem-apply-patches.after
-simple-patch /sysa/mes-0.24/mes-0.24.kaem mes-0.24.kaem-base-address.before mes-0.24.kaem-base-address.after
+simple-patch /sysa/mes-0.24.1/mes-0.24.1.kaem mes-0.24.1.kaem-apply-patches.before mes-0.24.1.kaem-apply-patches.after
+simple-patch /sysa/mes-0.24.1/mes-0.24.1.kaem mes-0.24.1.kaem-base-address.before mes-0.24.1.kaem-base-address.after
 kaem --verbose --strict --file ./after.kaem
 
 cd builder-tools

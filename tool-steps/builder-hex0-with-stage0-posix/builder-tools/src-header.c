@@ -1,6 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "M2libc/bootstrappable.h"
 
 int main(int argc, char **argv)
