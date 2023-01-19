@@ -59,4 +59,14 @@ echo "src $(wc -c mes-0.24.1.kaem-base-address.before)"
 cat mes-0.24.1.kaem-base-address.before
 echo "src $(wc -c mes-0.24.1.kaem-base-address.after)"
 cat mes-0.24.1.kaem-base-address.after
+
+echo "src $(wc -c mes-fix-hex-conversions.before)"
+cat mes-fix-hex-conversions.before
+echo "src $(wc -c mes-fix-hex-conversions.after)"
+cat mes-fix-hex-conversions.after
+
+echo "src $(wc -c mes-fix-hex-conversions2.before)"
+cat mes-fix-hex-conversions2.before
+echo "src $(wc -c mes-fix-hex-conversions2.after)"
+cat mes-fix-hex-conversions2.after
 )

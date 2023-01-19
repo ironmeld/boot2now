@@ -1,6 +1,6 @@
 --- sysa/tcc-0.9.27/tcc-0.9.27.kaem.orig	2023-01-10 16:15:04.483855041 +0000
-+++ sysa/tcc-0.9.27/tcc-0.9.27.kaem	2023-01-19 18:16:47.198793161 +0000
-@@ -19,6 +19,11 @@
++++ sysa/tcc-0.9.27/tcc-0.9.27.kaem	2023-01-19 23:10:31.283308210 +0000
+@@ -19,6 +19,13 @@
  
  cd build
  untar --file ../src/${pkg}.tar
@@ -8,6 +8,8 @@
 +    /remove-fileopen.before /remove-fileopen.after
 +/x86/bin/simple-patch /sysa/tcc-0.9.27/build/tcc-0.9.27/tcctools.c \
 +    /addback-fileopen.before /addback-fileopen.after
++/x86/bin/simple-patch /sysa/tcc-0.9.27/build/tcc-0.9.27/tccelf.c \
++    /fiwix-paddr.before /fiwix-paddr.after
 +
  cd ${pkg}
  

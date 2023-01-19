@@ -1,6 +1,6 @@
 --- sysa/tcc-0.9.26/tcc-0.9.26.kaem.orig	2023-01-10 19:56:14.496242846 +0000
-+++ sysa/tcc-0.9.26/tcc-0.9.26.kaem	2023-01-19 18:07:21.834776639 +0000
-@@ -31,6 +31,11 @@
++++ sysa/tcc-0.9.26/tcc-0.9.26.kaem	2023-01-19 21:24:53.487122993 +0000
+@@ -31,7 +31,17 @@
  
  cd build
  untar --file ../src/${TCC_TAR}.tar
@@ -10,9 +10,15 @@
 +    /addback-fileopen.before /addback-fileopen.after
 +
  untar --non-strict --file ../src/${MES_PKG}.tar
++/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/lib/mes/abtol.c \
++    /mes-fix-hex-conversions.before /mes-fix-hex-conversions.after
++/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/lib/ctype/isxdigit.c \
++    /mes-fix-hex-conversions2.before /mes-fix-hex-conversions2.after
++
  
  # Create config.h
-@@ -60,6 +65,7 @@
+ cd ${TCC_PKG}
+@@ -60,6 +70,7 @@
      -D ONE_SOURCE=1 \
      tcc.c
  ${MES} --no-auto-compile -e main ${bindir}/mescc.scm -- \

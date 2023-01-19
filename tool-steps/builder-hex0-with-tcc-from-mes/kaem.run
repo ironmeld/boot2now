@@ -38,6 +38,11 @@ untar --file ${NYACC_PKG}.tar
 ungz --file ${distfiles}/${MES_PKG}.tar.gz --output ${MES_PKG}.tar
 untar --non-strict --file ${MES_PKG}.tar
 
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/lib/mes/abtol.c \
+    /mes-fix-hex-conversions.before /mes-fix-hex-conversions.after
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/lib/ctype/isxdigit.c \
+    /mes-fix-hex-conversions2.before /mes-fix-hex-conversions2.after
+
 cd ${MES_PREFIX}
 
 # Remove pregenerated files

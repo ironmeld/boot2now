@@ -1,3 +1,7 @@
 untar --non-strict --file ../src/${MES_PKG}.tar # ignore symlinks
 /x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/kaem.run \
     /mes-kaem.run-base-address.before /mes-kaem.run-base-address.after
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/lib/mes/abtol.c \
+    /mes-fix-hex-conversions.before /mes-fix-hex-conversions.after
+/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/lib/ctype/isxdigit.c \
+    /mes-fix-hex-conversions2.before /mes-fix-hex-conversions2.after

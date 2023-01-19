@@ -65,5 +65,19 @@ echo "src $(wc -c addback-fileopen.before)"
 cat addback-fileopen.before
 echo "src $(wc -c addback-fileopen.after)"
 cat addback-fileopen.after
+
+echo "src $(wc -c fiwix-paddr.before)"
+cat fiwix-paddr.before
+echo "src $(wc -c fiwix-paddr.after)"
+cat fiwix-paddr.after
+
+echo "src $(wc -c mes-fix-hex-conversions.before)"
+cat mes-fix-hex-conversions.before
+echo "src $(wc -c mes-fix-hex-conversions.after)"
+cat mes-fix-hex-conversions.after
+echo "src $(wc -c mes-fix-hex-conversions2.before)"
+cat mes-fix-hex-conversions2.before
+echo "src $(wc -c mes-fix-hex-conversions2.after)"
+cat mes-fix-hex-conversions2.after
 )
 

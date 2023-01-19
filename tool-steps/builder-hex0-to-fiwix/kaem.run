@@ -1,0 +1,25 @@
+ARCH_DIR="x86"
+ARCH="x86"
+ARCH_DIR="x86"
+M2LIBC="M2libc"
+TOOLS="${ARCH_DIR}/bin"
+BLOOD_FLAG=" "
+BASE_ADDRESS="0x08048000"
+ENDIAN_FLAG="--little-endian"
+BINDIR="${ARCH_DIR}/bin"
+BUILDDIR="${ARCH_DIR}/artifact"
+
+M2LIBC_PATH=M2libc
+PATH=/x86/bin
+
+ungz --file rootfs.tar.gz --output rootfs.tar
+untar --non-strict --file rootfs.tar
+
+# Now, launch live-bootstrap to build make.
+cd /
+#UPDATE_CHECKSUMS=True
+kaem --verbose --strict --file ./after.kaem
+
+# Now, build a builder image with fiwix.
+cd ../builder-tools
+../${ARCH_DIR}/bin/kaem --verbose --strict --file ./build-builder.kaem
