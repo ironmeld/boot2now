@@ -6,13 +6,15 @@ cat kaem.run
 
 rm -rf BUILD/rootfs
 mkdir -p BUILD/rootfs/sysa
-cp -rp \
+cp -rp --dereference \
     ../../modules/live-bootstrap/sysa/mes-0.24.1 \
     ../../modules/live-bootstrap/sysa/tcc-0.9.26 \
+    ../../modules/live-bootstrap/sysa/tcc-0.9.27 \
     BUILD/rootfs/sysa
 
 cp run.kaem.tcc-only BUILD/rootfs/sysa/run.kaem
-cp tcc-0.9.26.kaem BUILD/rootfs/sysa/tcc-0.9.26
+(cd BUILD/rootfs;patch --silent -p0 < ../../tcc-0.9.26.kaem.patch)
+(cd BUILD/rootfs;patch --silent -p0 < ../../tcc-0.9.27.kaem.patch)
 cp ../../modules/live-bootstrap/sysa/after.kaem BUILD/rootfs
 
 (
@@ -29,6 +31,7 @@ mkdir BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/mes-0.24.1.tar.gz BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/nyacc-1.00.2.tar.gz BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/tcc-0.9.26.tar.gz BUILD/rootfs/sysa/distfiles
+cp ../../distfiles/tcc-0.9.27.tar.bz2 BUILD/rootfs/sysa/distfiles
 (
 echo "src 0 sysa"
 echo "src 0 sysa/distfiles"
@@ -39,6 +42,8 @@ echo "src $(wc -c sysa/distfiles/nyacc-1.00.2.tar.gz)"
 cat sysa/distfiles/nyacc-1.00.2.tar.gz
 echo "src $(wc -c sysa/distfiles/tcc-0.9.26.tar.gz)"
 cat sysa/distfiles/tcc-0.9.26.tar.gz
+echo "src $(wc -c sysa/distfiles/tcc-0.9.27.tar.bz2)"
+cat sysa/distfiles/tcc-0.9.27.tar.bz2
 )
 
 echo "src 0 /sysa/bootstrap.cfg"

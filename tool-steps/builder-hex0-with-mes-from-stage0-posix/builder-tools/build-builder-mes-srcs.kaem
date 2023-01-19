@@ -9,6 +9,7 @@ src-header ${prefix}
 src-header ${bindir}
 src-header ${bindir}/mes
 src-header ${bindir}/mescc.scm
+src-header ${bindir}/checksum-transcriber
 
 src-header ${libdir}
 src-header ${libdir}/x86-mes

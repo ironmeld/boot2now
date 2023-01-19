@@ -9,15 +9,26 @@
 
 set -ex
 
+M2LIBC_PATH=/M2libc
+
 # Environmental variables needed for mes
 NYACC_PKG=nyacc-1.00.2
-MES_PKG=mes-0.24.1
+MES_VERSION=0.24.1
+MES_PKG=mes-${MES_VERSION}
 MES_PKG_DIR=${MES_PKG}
 MES_PREFIX=${sysa}/${MES_PKG}/build/${MES_PKG_DIR}
 GUILE_LOAD_PATH=${MES_PREFIX}/mes/module:${MES_PREFIX}/module:${sysa}/${MES_PKG}/build/${NYACC_PKG}/module
 
 # tcc 0.9.26
 pkg="tcc-0.9.26"
+cd ${pkg}
+kaem --file ${pkg}.kaem
+cd ..
+
+libdir=${libdir}/mes
+
+# tcc 0.9.27
+pkg="tcc-0.9.27"
 cd ${pkg}
 kaem --file ${pkg}.kaem
 cd ..

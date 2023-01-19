@@ -9,6 +9,7 @@ catm mescc \
   ${prefix}.src \
   ${bindir}.src \
   ${bindir}/mescc.scm.src ${bindir}/mescc.scm \
+  ${bindir}/checksum-transcriber.src ${bindir}/checksum-transcriber \
   ${libdir}.src \
   ${libdir}/x86-mes.src \
   ${libdir}/x86-mes/libc.a.src ${libdir}/x86-mes/libc.a \
