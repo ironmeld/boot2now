@@ -51,11 +51,6 @@ cat simple-patch.c
 
 (
 cd patches
-echo "src $(wc -c mes-increase-files.before)"
-cat mes-increase-files.before
-echo "src $(wc -c mes-increase-files.after)"
-cat mes-increase-files.after
-
 echo "src $(wc -c remove-fileopen.before)"
 cat remove-fileopen.before
 echo "src $(wc -c remove-fileopen.after)"

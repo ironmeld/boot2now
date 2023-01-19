@@ -38,13 +38,6 @@ untar --file ${NYACC_PKG}.tar
 ungz --file ${distfiles}/${MES_PKG}.tar.gz --output ${MES_PKG}.tar
 untar --non-strict --file ${MES_PKG}.tar
 
-/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/m2/lib.h \
-    /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/mes/constants.h \
-    /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/mes-0.24.1/build/mes-0.24.1/include/mes/lib.h \
-    /mes-increase-files.before /mes-increase-files.after
-
 cd ${MES_PREFIX}
 
 # Remove pregenerated files

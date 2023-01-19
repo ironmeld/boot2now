@@ -59,9 +59,4 @@ echo "src $(wc -c mes-0.24.1.kaem-base-address.before)"
 cat mes-0.24.1.kaem-base-address.before
 echo "src $(wc -c mes-0.24.1.kaem-base-address.after)"
 cat mes-0.24.1.kaem-base-address.after
-
-echo "src $(wc -c mes-increase-files.before)"
-cat mes-increase-files.before
-echo "src $(wc -c mes-increase-files.after)"
-cat mes-increase-files.after
 )

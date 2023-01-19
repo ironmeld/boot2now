@@ -33,13 +33,6 @@ untar --file ../src/${TCC_TAR}.tar
     /addback-fileopen.before /addback-fileopen.after
 
 untar --non-strict --file ../src/${MES_PKG}.tar
-/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/include/m2/lib.h \
-    /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/include/mes/constants.h \
-    /mes-increase-files.before /mes-increase-files.after
-/x86/bin/simple-patch /sysa/tcc-0.9.26/build/mes-0.24.1/include/mes/lib.h \
-    /mes-increase-files.before /mes-increase-files.after
-
 
 # Create config.h
 cd ${TCC_PKG}
