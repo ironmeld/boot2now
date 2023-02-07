@@ -19,9 +19,9 @@ GUILE_LOAD_PATH=${MES_PREFIX}/mes/module:${MES_PREFIX}/module:${sysa}/${MES_PKG}
 
 libdir=${libdir}/mes
 
-# make
+# The Fiwix kernel
 pkg="fiwix-live-bootstrap"
 cd ${pkg}
-kaem --file ${pkg}.kaem
+kaem --verbose --file ${pkg}.kaem
 cd ..
 

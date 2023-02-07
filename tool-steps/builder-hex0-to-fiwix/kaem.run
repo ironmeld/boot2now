@@ -15,7 +15,7 @@ PATH=/x86/bin
 ungz --file rootfs.tar.gz --output rootfs.tar
 untar --non-strict --file rootfs.tar
 
-# Now, launch live-bootstrap to build make.
+# Now, launch live-bootstrap to build fiwix.
 cd /
 #UPDATE_CHECKSUMS=True
 kaem --verbose --strict --file ./after.kaem

@@ -6,11 +6,12 @@ cat kaem.run
 
 rm -rf BUILD/rootfs
 mkdir -p BUILD/rootfs/sysa
-mkdir -p BUILD/rootfs/sysa/fiwix-live-bootstrap
 
 cp ../../modules/live-bootstrap/sysa/after.kaem BUILD/rootfs
+
+cp -rp fiwix-live-bootstrap BUILD/rootfs/sysa/
+
 cp run.kaem-fiwix-only BUILD/rootfs/sysa/run.kaem
-cp fiwix-live-bootstrap.kaem BUILD/rootfs/sysa/fiwix-live-bootstrap
 
 (
 cd BUILD/rootfs
@@ -21,7 +22,7 @@ echo "src $(wc -c rootfs.tar.gz)"
 cat rootfs.tar.gz
 )
 
-# sysa/distfiles are separate from rootfs because untar has trouble with the mes and nyacc tar files
+# sysa/distfiles are separate from rootfs because untar has trouble with the tar files
 mkdir BUILD/rootfs/sysa/distfiles
 cp ../../distfiles/fiwix-live-bootstrap.tar.gz BUILD/rootfs/sysa/distfiles
 
