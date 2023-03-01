@@ -1,0 +1,17 @@
+diff --git a/sysa/tcc-0.9.27/tcc-0.9.27.kaem b/sysa/tcc-0.9.27/tcc-0.9.27.kaem
+index a774950..c857591 100755
+--- a/sysa/tcc-0.9.27/tcc-0.9.27.kaem
++++ b/sysa/tcc-0.9.27/tcc-0.9.27.kaem
+@@ -20,6 +20,12 @@ cd ..
+ 
+ cd build
+ untar --file ../src/${pkg}.tar
++/x86/bin/simple-patch /sysa/tcc-0.9.27/build/tcc-0.9.27/tcctools.c \
++    /sysa/tcc-0.9.27/simple-patches/remove-fileopen.before /sysa/tcc-0.9.27/simple-patches/remove-fileopen.after
++/x86/bin/simple-patch /sysa/tcc-0.9.27/build/tcc-0.9.27/tcctools.c \
++    /sysa/tcc-0.9.27/simple-patches/addback-fileopen.before /sysa/tcc-0.9.27/simple-patches/addback-fileopen.after
++/x86/bin/simple-patch /sysa/tcc-0.9.27/build/tcc-0.9.27/tccelf.c \
++    /sysa/tcc-0.9.27/simple-patches/fiwix-paddr.before /sysa/tcc-0.9.27/simple-patches/fiwix-paddr.after
+ untar --non-strict --file ../src/${MES_PKG}.tar
+ cd ${pkg}
+ 

@@ -1,0 +1,13 @@
+diff --git a/sysc/run2.sh b/sysc/run2.sh
+index c55443b..d97fbe6 100755
+--- a/sysc/run2.sh
++++ b/sysc/run2.sh
+@@ -66,7 +66,7 @@ build openssl-1.1.1l
+ 
+ build ca-certificates-3.86
+ 
+-build curl-7.83.0
++build curl-7.83.0 curl-7.83.0-pass2.sh
+ 
+ build zlib-1.2.13
+ 
