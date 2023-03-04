@@ -1,20 +1,8 @@
 diff --git a/sysa/run.kaem b/sysa/run.kaem
-index f12d3b5..41477db 100755
+index f12d3b5..483b6f0 100755
 --- a/sysa/run.kaem
 +++ b/sysa/run.kaem
-@@ -9,11 +9,21 @@
- 
- set -ex
- 
-+if match x${KERNEL_BOOTSTRAP} xTrue; then
-+    cd ..
-+    ungz --file live-bootstrap.tar.gz --output live-bootstrap.tar
-+    untar --file live-bootstrap.tar
-+    cd sysa
-+fi
-+
- # checksum-transcriber utility
- M2LIBC_PATH=/M2libc
+@@ -14,6 +14,9 @@ M2LIBC_PATH=/M2libc
  M2-Mesoplanet --architecture ${ARCH} -f checksum-transcriber.c -o ${bindir}/checksum-transcriber
  sha256sum -c checksum-transcriber.SHA256SUM
  
@@ -24,7 +12,7 @@ index f12d3b5..41477db 100755
  # Environmental variables needed for mes
  NYACC_PKG=nyacc-1.00.2
  MES_VERSION=0.24.2
-@@ -42,58 +52,23 @@ cd ${pkg}
+@@ -42,58 +45,26 @@ cd ${pkg}
  kaem --file ${pkg}.kaem
  cd ..
  
@@ -90,11 +78,14 @@ index f12d3b5..41477db 100755
 +    kaem --verbose --file ${pkg}.kaem
 +    cd ..
 +
-+    # ext2 file system for Fiwix
++    # ext2 file system library for Fiwix
 +    pkg="lwext4-1.0.0-lb1"
 +    cd ${pkg}
 +    kaem --verbose --file ${pkg}.kaem
-+    cd ..
++    # Build the ext2 image
++    cd build/${pkg}/src
++    ./make_fiwix_initrd
++    cd ../../../..
 +
 +    # Live boot loader for Fiwix
 +    pkg="kexec-fiwix"

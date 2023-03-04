@@ -1,5 +1,5 @@
 diff --git a/parts.rst b/parts.rst
-index 55ff0bf..2d6d473 100644
+index c2c6ffb..55527c8 100644
 --- a/parts.rst
 +++ b/parts.rst
 @@ -7,6 +7,7 @@
@@ -29,7 +29,7 @@ index 55ff0bf..2d6d473 100644
 +
 +builder-hex0 (kernel bootstrap)
 +===============================
-+If the kernel-bootstrap option is enabled then the ``builder-hex0`` kernel boots from a hard drive and loads an enormous shell script which embeds files (loaded with the ``src`` command) and the initial commands to build ``hex0-seed``, ``kaem-optional-seed``, and the command which launches stage0-posix using ``kaem-optional-seed`` and the stage0-posix launch script ``kaem.x86``. Builder-hex0 is written in hex0 and can be compiled with the ``hex0-seed``, ``sed``, the tiny ``builder-hex0-mini`` boot kernel or it can build itself.
++If the kernel-bootstrap option is enabled then the ``builder-hex0`` kernel boots from a hard drive and loads an enormous shell script which embeds files (loaded with the ``src`` command) and the initial commands to build ``hex0-seed``, ``kaem-optional-seed``, and the command which launches stage0-posix using ``kaem-optional-seed`` and the stage0-posix launch script ``kaem.x86``. Builder-hex0 is written in hex0 and can be compiled with any one of ``hex0-seed``, ``sed``, the tiny ``builder-hex0-mini`` boot kernel or it can build itself.
 +
 +
  kaem-optional

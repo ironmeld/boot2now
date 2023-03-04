@@ -4,6 +4,9 @@
 #include "M2libc/bootstrappable.h"
 
 /*
+SPDX-FileCopyrightText: 2023 Richard Masters <grick23@gmail.com>
+SPDX-License-Identifier: MIT
+
 Simple Patch program.
 
 This program is written in a subset of C called M2, which is from the

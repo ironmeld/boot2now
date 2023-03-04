@@ -1,3 +1,5 @@
+/* SPDX-FileCopyrightText: 2023 Richard Masters <grick23@gmail.com> */
+/* SPDX-License-Identifier: MIT */
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

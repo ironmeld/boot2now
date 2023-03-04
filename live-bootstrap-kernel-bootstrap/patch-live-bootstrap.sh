@@ -106,10 +106,12 @@ cp checksums/heirloom-devtools-070527.checksums $BUILDROOT/sysa/heirloom-devtool
 cp checksums/bash-2.05b.checksums $BUILDROOT/sysa/bash-2.05b
 cp checksums/SHA256SUMS.pkgs $BUILDROOT/sysa
 
-# Update documentation
+# Update documentation and licensing
 (
 cd $BUILDROOT
 patch --no-backup-if-mismatch -p1 < ../../parts.rst.patch
+patch --no-backup-if-mismatch -p1 < ../../DEVEL.md.patch
+patch --no-backup-if-mismatch -p1 < ../../reuse.patch
 )
 
 echo "Patched live-bootstrap is in `pwd`/$BUILDROOT"

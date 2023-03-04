@@ -1,3 +1,7 @@
+/*
+ SPDX-FileCopyrightText: 2023 Richard Masters <grick23@gmail.com>
+ SPDX-License-Identifier: MIT
+ */
 #define CONFIG_USE_DEFAULT_CONFIG 0
 #define CONFIG_HAVE_OWN_OFLAGS 0
 #define CONFIG_HAVE_OWN_ERRNO 1

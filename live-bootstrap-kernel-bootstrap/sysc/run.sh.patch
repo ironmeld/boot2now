@@ -1,17 +1,14 @@
 diff --git a/sysc/run.sh b/sysc/run.sh
-index e9da3f4..716b984 100755
+index e9da3f4..55be06c 100755
 --- a/sysc/run.sh
 +++ b/sysc/run.sh
-@@ -34,6 +34,17 @@ populate_device_nodes
+@@ -34,6 +34,14 @@ populate_device_nodes
  
  create_fhs
  
 +if [ -e "${SOURCES}/distfiles" ]; then
 +    mv "${SOURCES}/distfiles" /
-+    echo "sysc: distfiles exists"
-+    ls -l /distfiles
 +else
-+    echo "sysc: distfiles does not exist"
 +    mkdir -p "${DISTFILES}"
 +fi
 +
@@ -20,7 +17,7 @@ index e9da3f4..716b984 100755
  # Obtain network connection
  if [ "${CHROOT}" = "False" ]; then
      dhcpcd --waitip=4
-@@ -50,12 +61,6 @@ if [ "${CHROOT}" = "False" ]; then
+@@ -50,12 +58,6 @@ if [ "${CHROOT}" = "False" ]; then
      done
  fi
  

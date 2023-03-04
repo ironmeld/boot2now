@@ -25,7 +25,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Modifications: Copyright (c) 2023 Richard Masters, same license.
+ * Modifications:
+ * SPDX-FileCopyrightText: 2023 Richard Masters <grick23@gmail.com>
+ * SPDX-License-Identifier: MIT
  */
 
 #include <stdio.h>
@@ -177,6 +179,10 @@ bool copy_file_list(char *file_list_path) {
 
 	FILE *file_list = fopen(file_list_path, "r");
 	while(fgets(src_filename, FILENAME_LENGTH, file_list)) {
+		/* Skip comments */
+		if (src_filename[0] == '#') {
+			continue;
+		}
 		src_filename[strlen(src_filename) - 1] = 0; /* strip newline */
 		strcpy(dst_filename, "/mp");
 		strcat(dst_filename, src_filename);
@@ -199,7 +205,7 @@ int main(int argc, char **argv)
 
 	/* Create zeroed out disk image file */
 	input_name = "image.ext2";
-	/* input_name = "/dev/hda"; */
+
 	memset(zeros, 0, BLOCK_SIZE);
 	FILE *ext2file = fopen(input_name, "w");
 	int b;
