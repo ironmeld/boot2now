@@ -1,5 +1,5 @@
 diff --git a/parts.rst b/parts.rst
-index c2c6ffb..55527c8 100644
+index 0b99170..8d31f1f 100644
 --- a/parts.rst
 +++ b/parts.rst
 @@ -7,6 +7,7 @@
@@ -65,7 +65,7 @@ index c2c6ffb..55527c8 100644
  make 3.82
  =========
  
-@@ -586,6 +619,7 @@ musl 1.2.3
+@@ -597,6 +630,7 @@ musl 1.2.3
  GCC can build the latest as of the time of writing musl version.
  
  We also don't need any of the TCC patches that we used before.
@@ -73,7 +73,7 @@ index c2c6ffb..55527c8 100644
  
  gcc 4.0.4
  =========
-@@ -629,6 +663,11 @@ The next step is not a package, but the creation of the sysb rootfs, containing
+@@ -652,6 +686,11 @@ The next step is not a package, but the creation of the sysb rootfs, containing
  all of the scripts for sysb (which merely move to sysc). Again, this is only
  done in non-chroot mode, because sysb does not exist in chroot mode.
  
@@ -85,18 +85,19 @@ index c2c6ffb..55527c8 100644
  Linux kernel 4.9.10
  ===================
  
-@@ -665,6 +704,14 @@ sysb is purely a transition to sysc, allowing binaries from sysa to get onto a
- disk (as sysa does not necessarily have hard disk support in the kernel).
- It populates device nodes, mounts sysc, copies over data, and executes sysc.
+@@ -702,6 +741,15 @@ and is built with GNU readline support so it can be used as a fully-featured
+ interactive shell. ``autoconf-2.69`` is used to regenerate the configure
+ script and ``bison`` is used to recreate some included generated files.
  
 +curl 7.83.0
 +===========
++
 +Curl is built in sysc because Linux must be running with support for threads.
 +Curl requires musl 1.2.3 with thread support which was built at the end of sysa.
 +Curl is built first in sysc so the rest of the packages can be downloaded.
 +Note that the tar file for curl itself was copied over from sysa because
 +curl is not yet available to download it.
 +
- bash 5.1
+ xz 5.4.1
  ========
  

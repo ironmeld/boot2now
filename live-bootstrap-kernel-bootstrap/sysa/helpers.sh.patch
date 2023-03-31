@@ -1,0 +1,14 @@
+diff --git a/sysa/helpers.sh b/sysa/helpers.sh
+index 2e3ca93..502948e 100755
+--- a/sysa/helpers.sh
++++ b/sysa/helpers.sh
+@@ -393,6 +393,9 @@ src_checksum() {
+     if ! [ "$UPDATE_CHECKSUMS" = True ] ; then
+         # We avoid using pipes as that is not supported by initial sha256sum from mescc-tools-extra
+         local checksum_file=/tmp/checksum
++	if [ -e "${pkg}_${revision}.tar.bz2" ]; then
++		sha256sum "${pkg}_${revision}.tar.bz2"
++	fi
+         _grep "${pkg}_${revision}" "${SOURCES}/SHA256SUMS.pkgs" > "${checksum_file}" || true
+         # Check there is something in checksum_file
+         if ! [ -s "${checksum_file}" ]; then

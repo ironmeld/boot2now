@@ -214,6 +214,6 @@ int main() {
 
 	printf("kexec-fiwix: jumping to trampoline...\n");
 	__asm__ __volatile__ (
-		".byte 0xEA, 0x00, 0x40, 0x00, 0x00, 0x08, 0x00 \n\t"
+		"ljmp $0x8, $0x00004000\n\t"
 	);
 }

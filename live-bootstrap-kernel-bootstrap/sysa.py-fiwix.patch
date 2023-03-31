@@ -1,5 +1,5 @@
 diff --git a/sysa.py b/sysa.py
-index e495f2a..d78f68d 100755
+index e495f2a..57a0f0e 100755
 --- a/sysa.py
 +++ b/sysa.py
 @@ -13,6 +13,7 @@ import shutil
@@ -15,11 +15,11 @@ index e495f2a..d78f68d 100755
          self.tmp_dir = tmpdir.add_sys("sysa")
  
 -    def prepare(self, create_initramfs):
-+    def prepare(self, create_initramfs, kernel_bootstrap=False):
++    def prepare(self, create_initramfs, kernel_bootstrap=False, format_ext2=False):
          """
          Prepare directory structure for System A.
          We create an empty tmp directory, unpack stage0-posix.
-@@ -59,6 +60,11 @@ class SysA(SysGeneral):
+@@ -59,12 +60,17 @@ class SysA(SysGeneral):
  
          self.sysc(create_initramfs)
  
@@ -31,6 +31,13 @@ index e495f2a..d78f68d 100755
          if self.repo_path:
              repo_dir = os.path.join(self.tmp_dir, 'usr', 'src', 'repo-preseeded')
              shutil.copytree(self.repo_path, repo_dir)
+ 
+         if create_initramfs:
+-            self.make_initramfs()
++            self.make_initramfs(format_ext2)
+ 
+     def sysa(self):
+         """Copy in sysa files for sysa."""
 @@ -101,3 +107,126 @@ class SysA(SysGeneral):
          # stage0-posix hook to continue running live-bootstrap
          shutil.copy2(os.path.join(self.sys_dir, 'after.kaem'),

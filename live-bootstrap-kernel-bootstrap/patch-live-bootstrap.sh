@@ -2,6 +2,8 @@
 set -euo pipefail
 
 BUILDROOT=BUILD/live-bootstrap
+FIWIX_OPTIONS=0
+DEBUG=0
 
 rm -rf BUILD
 mkdir BUILD
@@ -9,9 +11,29 @@ cd BUILD
 
 git clone https://github.com/fosslinux/live-bootstrap
 cd live-bootstrap
-git checkout ae7e1f94983a47279dcdcfc2ac6d8aaa64f25235  # Feb 27, 2023
+git checkout 5ea8dd313638bc1f0f548edecd8b956591df8b54 # Mar 23, 2023
 git submodule update --init --recursive
 cd ../..
+
+# Add support files for building builder-hex0 file system (srcfs)
+mkdir $BUILDROOT/kernel-bootstrap
+cp ../modules/builder-hex0/builder-hex0.hex0 $BUILDROOT/kernel-bootstrap/builder-hex0-x86.hex0
+
+# Patch the live-bootstrap launcher
+(
+cd $BUILDROOT
+if [ "$FIWIX_OPTIONS" = "1" ]; then
+  patch --no-backup-if-mismatch -p1 < ../../rootfs.py-fiwix.patch
+  patch --no-backup-if-mismatch -p1 < ../../sysa.py-fiwix.patch
+  patch --no-backup-if-mismatch -p1 < ../../sysgeneral.py-fiwix.patch
+  cp ../../dev.tgz .
+  cp ../../bootfiwix* .
+  cp ../../mbr-* .
+else
+  patch --no-backup-if-mismatch -p1 < ../../rootfs.py.patch
+  patch --no-backup-if-mismatch -p1 < ../../sysa.py.patch
+fi
+)
 
 # For builder-hex0 related patches
 cp ../utils/simple-patch.c $BUILDROOT/sysa
@@ -55,40 +77,26 @@ cd $BUILDROOT
 patch --no-backup-if-mismatch -p1 < ../../musl-1.2.3/musl-1.2.3.sh.patch
 )
 
-# Rebuild musl with proper thread support (no patches to disable it)
-# Do not build curl in sysa - we don't have musl with thread support
+# Remove bash2 rebuild. It triggers a bison page fault.
 (
 cd $BUILDROOT
 patch --no-backup-if-mismatch -p1 < ../../sysa/run.sh.patch
 )
+
+# Rebuild musl with proper thread support (no patches to disable it)
+# Do not build curl in sysa - we don't have musl with thread support
+(
+cd $BUILDROOT
+patch --no-backup-if-mismatch -p1 < ../../sysa/run2.sh.patch
+)
+
+
 # For curl, we only need to carry over source from sysa to sysc
 rm -rf $BUILDROOT/sysa/curl-7.83.0/files
 rm -rf $BUILDROOT/sysa/curl-7.83.0/patches
 (
 cd $BUILDROOT
 patch --no-backup-if-mismatch -p1 < ../../sysc/init.patch
-)
-
-# Build curl pass1 in sysc - using sysa tools
-mv $BUILDROOT/sysa/curl-7.83.0/curl-7.83.0.sh $BUILDROOT/sysc/curl-7.83.0/curl-7.83.0-pass1.sh
-mv $BUILDROOT/sysc/curl-7.83.0/curl-7.83.0.sh $BUILDROOT/sysc/curl-7.83.0/curl-7.83.0-pass2.sh
-# sysc curl must use tar.gz for first pass, we don't have xz yet
-cp $BUILDROOT/sysa/curl-7.83.0/sources $BUILDROOT/sysc/curl-7.83.0
-(
-cd $BUILDROOT
-patch --no-backup-if-mismatch -p1 < ../../sysc/run.sh.patch
-patch --no-backup-if-mismatch -p1 < ../../sysc/run2.sh.patch
-)
-
-# Add support files for building builder-hex0 file system (srcfs)
-mkdir $BUILDROOT/kernel-bootstrap
-cp ../modules/builder-hex0/builder-hex0.hex0 $BUILDROOT/kernel-bootstrap/builder-hex0-x86.hex0
-
-# Now patch the live-bootstrap launcher
-(
-cd $BUILDROOT
-patch --no-backup-if-mismatch -p1 < ../../rootfs.py.patch
-patch --no-backup-if-mismatch -p1 < ../../sysa.py.patch
 )
 
 # new checksums
@@ -112,6 +120,14 @@ cd $BUILDROOT
 patch --no-backup-if-mismatch -p1 < ../../parts.rst.patch
 patch --no-backup-if-mismatch -p1 < ../../DEVEL.md.patch
 patch --no-backup-if-mismatch -p1 < ../../reuse.patch
+)
+
+# DEVELOPMENT
+(
+cd $BUILDROOT
+if [ "$DEBUG" = "1" ]; then
+    patch --no-backup-if-mismatch -p1 < ../../sysa/helpers.sh.patch
+fi
 )
 
 echo "Patched live-bootstrap is in `pwd`/$BUILDROOT"

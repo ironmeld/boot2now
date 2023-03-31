@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cat mbr-2048-1300.img tmp/sysa/initramfs > hda.img
+rm tmp/sysa/initramfs
+
+qemu-system-i386 \
+    -no-reboot \
+    -nographic \
+    -debugcon file:debugcon.log \
+    -enable-kvm \
+    -drive file=hda.img,format=raw \
+    -kernel kernel \
+    -append "console=/dev/ttyS0 root=/dev/hda1 rootfstype=ext2" \
+    -m 4G

@@ -7,7 +7,7 @@ patch-live-bootstrap:
 	./patch-live-bootstrap.sh
 
 run-live-bootstrap:
-	(cd BUILD/live-bootstrap;./rootfs.py --qemu --kernel-bootstrap)
+	(cd BUILD/live-bootstrap;./rootfs.py --qemu)
 
 clean:
 	rm -rf BUILD

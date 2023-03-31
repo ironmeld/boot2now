@@ -1,0 +1,49 @@
+diff --git a/lib/sysgeneral.py b/lib/sysgeneral.py
+index 1938645..cf13dcf 100644
+--- a/lib/sysgeneral.py
++++ b/lib/sysgeneral.py
+@@ -103,7 +103,7 @@ this script the next time")
+ 
+         return "\n".join(manifest_lines)
+ 
+-    def make_initramfs(self):
++    def make_initramfs(self, format_ext2=False):
+         """Package binary bootstrap seeds and sources into initramfs."""
+         self.initramfs_path = os.path.join(self.tmp_dir, 'initramfs')
+ 
+@@ -119,13 +119,28 @@ this script the next time")
+         file_list = [remove_prefix(f, self.tmp_dir + os.sep) for f in file_list]
+ 
+         # Create the initramfs
+-        with open(self.initramfs_path, "w", encoding="utf_8") as initramfs:
+-            # pylint: disable=consider-using-with
+-            cpio = subprocess.Popen(
+-                    ["cpio", "--format", "newc", "--create",
+-                        "--directory", self.tmp_dir],
+-                     stdin=subprocess.PIPE, stdout=initramfs)
+-            cpio.communicate(input='\n'.join(file_list).encode())
++        if format_ext2:
++            with open('filelist.txt', 'w') as fl:
++                for f in file_list:
++                    fl.write("%s\n" % f)
++            subprocess.run(["qemu-img", "create", self.initramfs_path, "1300M"])
++            subprocess.run(["mkfs.ext2", "-b", "1024", "-r", "0", "-L", "FIWIX", self.initramfs_path])
++            subprocess.run(["mkdir", "mnt.dst"])
++            subprocess.run(["sudo", "mount", "-t", "ext2", "-o", "loop,rw", self.initramfs_path, "mnt.dst"])
++            subprocess.run(["sudo", "tar", "-C", self.tmp_dir, "-c", "-z", "-f", "files.tgz", "-T", "filelist.txt"])
++            subprocess.run(["sudo", "tar", "-C", "mnt.dst", "-x", "-z", "-f", "files.tgz"])
++            subprocess.run(["sudo", "tar", "-C", "mnt.dst", "-x", "-z", "-f", "dev.tgz"])
++            subprocess.run(["sudo", "rm", "files.tgz"])
++            subprocess.run(["sudo", "umount", "mnt.dst"])
++            subprocess.run(["rmdir", "mnt.dst"])
++        else:
++            with open(self.initramfs_path, "w", encoding="utf_8") as initramfs:
++                # pylint: disable=consider-using-with
++                cpio = subprocess.Popen(
++                        ["cpio", "--format", "newc", "--create",
++                            "--directory", self.tmp_dir],
++                         stdin=subprocess.PIPE, stdout=initramfs)
++                cpio.communicate(input='\n'.join(file_list).encode())
+ 
+ stage0_arch_map = {
+     "amd64": "AMD64",

@@ -1,8 +1,16 @@
 diff --git a/rootfs.py b/rootfs.py
-index 8816b40..d36b105 100755
+index 8816b40..146082d 100755
 --- a/rootfs.py
 +++ b/rootfs.py
-@@ -34,6 +34,10 @@ def create_configuration_file(args):
+@@ -15,6 +15,7 @@ you can run bootstap inside chroot.
+ 
+ import argparse
+ import os
++import subprocess
+ 
+ from sysa import SysA
+ from sysc import SysC
+@@ -34,6 +35,10 @@ def create_configuration_file(args):
          config.write("CHROOT_ONLY_SYSA=" + str(args.bwrap) + "\n")
          config.write("UPDATE_CHECKSUMS=" + str(args.update_checksums) + "\n")
          config.write("DISK=sda1\n")
@@ -13,17 +21,21 @@ index 8816b40..d36b105 100755
  
  # pylint: disable=too-many-statements
  def main():
-@@ -81,8 +85,7 @@ def main():
+@@ -81,8 +86,11 @@ def main():
                          default="qemu-system-x86_64")
      parser.add_argument("-qr", "--qemu-ram", help="Memory (in megabytes) allocated to QEMU VM",
                          default=4096)
 -    parser.add_argument("-qk", "--kernel", help="Kernel to use (default is ./kernel)",
 -                        default="kernel")
 +    parser.add_argument("-qk", "--kernel", help="Kernel to use (default is ./kernel)")
++    parser.add_argument("-qfr", "--kernel-fiwix-rd", help="The kernel is Fiwix using a ramd rive",
++                        action="store_true")
++    parser.add_argument("-qfh", "--kernel-fiwix-hd", help="The kernel is Fiwix using a hard dive",
++                        action="store_true")
  
      parser.add_argument("-b", "--bare-metal", help="Build images for bare metal",
                          action="store_true")
-@@ -108,6 +111,10 @@ def main():
+@@ -108,6 +116,10 @@ def main():
      if check_types() == 0:
          raise ValueError("One of qemu, chroot, bwrap, or bare metal must be selected.")
  
@@ -34,7 +46,7 @@ index 8816b40..d36b105 100755
      # Arch validation
      if args.arch != "x86":
          raise ValueError("Only x86 is supported at the moment.")
-@@ -199,27 +206,42 @@ print(shutil.which('chroot'))
+@@ -199,27 +211,47 @@ print(shutil.which('chroot'))
                       '/init')
  
      elif args.bare_metal:
@@ -71,18 +83,23 @@ index 8816b40..d36b105 100755
 -            '-append', 'console=ttyS0')
 +        if args.kernel:
 +            system_c.prepare(create_disk_image=True)
-+            system_a.prepare(create_initramfs=True)
++            system_a.prepare(create_initramfs=True, format_ext2=(args.kernel_fiwix_rd or args.kernel_fiwix_hd))
 +
-+            run(args.qemu_cmd,
-+                '-enable-kvm',
-+                '-m', str(args.qemu_ram) + 'M',
-+                '-no-reboot',
-+                '-hda', tmpdir.get_disk("sysc"),
-+                '-nic', 'user,ipv6=off,model=e1000',
-+                '-kernel', args.kernel,
-+                '-initrd', system_a.initramfs_path,
-+                '-nographic',
-+                '-append', 'console=ttyS0')
++            if args.kernel_fiwix_rd:
++                subprocess.run(["./bootfiwix-rd"])
++            elif args.kernel_fiwix_hd:
++                subprocess.run(["./bootfiwix-hd"])
++            else:
++                run(args.qemu_cmd,
++                    '-enable-kvm',
++                    '-m', str(args.qemu_ram) + 'M',
++                    '-no-reboot',
++                    '-hda', tmpdir.get_disk("sysc"),
++                    '-nic', 'user,ipv6=off,model=e1000',
++                    '-kernel', args.kernel,
++                    '-initrd', system_a.initramfs_path,
++                    '-nographic',
++                    '-append', 'console=ttyS0')
 +        else:
 +            system_a.prepare(create_initramfs=True, kernel_bootstrap=True)
 +            run(args.qemu_cmd,

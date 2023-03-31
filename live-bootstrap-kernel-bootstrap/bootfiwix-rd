@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+qemu-system-i386 \
+    -no-reboot \
+    -nographic \
+    -debugcon file:debugcon.log \
+    -enable-kvm \
+    -kernel kernel \
+    -initrd tmp/sysa/initramfs \
+    -append "console=/dev/ttyS0 root=/dev/ram0 ramdisksize=1331200 rootfstype=ext2 initrd=tmp/sysa/initramfs" \
+    -m 4G
