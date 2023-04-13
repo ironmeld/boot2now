@@ -1,5 +1,5 @@
 diff --git a/sysa/run.kaem b/sysa/run.kaem
-index f12d3b5..483b6f0 100755
+index f12d3b5..eb5e7bb 100755
 --- a/sysa/run.kaem
 +++ b/sysa/run.kaem
 @@ -14,6 +14,9 @@ M2LIBC_PATH=/M2libc
@@ -12,7 +12,7 @@ index f12d3b5..483b6f0 100755
  # Environmental variables needed for mes
  NYACC_PKG=nyacc-1.00.2
  MES_VERSION=0.24.2
-@@ -42,58 +45,26 @@ cd ${pkg}
+@@ -42,58 +45,30 @@ cd ${pkg}
  kaem --file ${pkg}.kaem
  cd ..
  
@@ -82,15 +82,19 @@ index f12d3b5..483b6f0 100755
 +    pkg="lwext4-1.0.0-lb1"
 +    cd ${pkg}
 +    kaem --verbose --file ${pkg}.kaem
++    cd ..
++
 +    # Build the ext2 image
-+    cd build/${pkg}/src
-+    ./make_fiwix_initrd
-+    cd ../../../..
++    make_fiwix_initrd
 +
 +    # Live boot loader for Fiwix
 +    pkg="kexec-fiwix"
 +    cd ${pkg}
 +    kaem --verbose --file ${pkg}.kaem
++    cd ..
++
++    # Boot Fiwix
++    kexec-fiwix
 +else
 +    exec kaem --verbose --file run-after-fiwix.kaem
 +fi

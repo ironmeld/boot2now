@@ -1,15 +1,15 @@
 diff --git a/rootfs.py b/rootfs.py
-index 8816b40..d36b105 100755
+index 8816b40..9342591 100755
 --- a/rootfs.py
 +++ b/rootfs.py
 @@ -34,6 +34,10 @@ def create_configuration_file(args):
          config.write("CHROOT_ONLY_SYSA=" + str(args.bwrap) + "\n")
          config.write("UPDATE_CHECKSUMS=" + str(args.update_checksums) + "\n")
          config.write("DISK=sda1\n")
-+        if args.chroot or args.kernel:
-+            config.write("KERNEL_BOOTSTRAP=False\n")
-+        else:
++        if (args.bare_metal or args.qemu) and not args.kernel:
 +            config.write("KERNEL_BOOTSTRAP=True\n")
++        else:
++            config.write("KERNEL_BOOTSTRAP=False\n")
  
  # pylint: disable=too-many-statements
  def main():

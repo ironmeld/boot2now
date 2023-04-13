@@ -15,6 +15,10 @@ git checkout 5ea8dd313638bc1f0f548edecd8b956591df8b54 # Mar 23, 2023
 git submodule update --init --recursive
 cd ../..
 
+# Prepopulate dhcpcd because the URL is no longer valid
+mkdir $BUILDROOT/sysa/distfiles
+cp ../distfiles/dhcpcd-9.4.1.tar.gz $BUILDROOT/sysa/distfiles
+
 # Add support files for building builder-hex0 file system (srcfs)
 mkdir $BUILDROOT/kernel-bootstrap
 cp ../modules/builder-hex0/builder-hex0.hex0 $BUILDROOT/kernel-bootstrap/builder-hex0-x86.hex0
@@ -38,8 +42,7 @@ fi
 # For builder-hex0 related patches
 cp ../utils/simple-patch.c $BUILDROOT/sysa
 
-# mes: hex conversions and --base-address
-cp -rp mes-0.24.2/simple-patches $BUILDROOT/sysa/mes-0.24.2
+# mes: change --base-address for builder-hex0 compatibility
 (
 cd $BUILDROOT
 patch --no-backup-if-mismatch -p1 < ../../mes-0.24.2/mes-0.24.2.kaem.patch
@@ -69,7 +72,11 @@ cp -rp fiwix-1.4.0-lb1 lwext4-1.0.0-lb1 kexec-fiwix $BUILDROOT/sysa/
 
 # Patches needed for Fiwix due to lack of SYS_clone and SYS_set_thread_area
 cp musl-1.1.24/patches/* $BUILDROOT/sysa/musl-1.1.24/patches
-cp musl-1.1.24/patches/* $BUILDROOT/sysa/musl-1.1.24/patches-pass3
+(
+cd $BUILDROOT/sysa/musl-1.1.24/patches-pass3
+ln -s ../patches/avoid_set_thread_area.patch
+ln -s ../patches/avoid_sys_clone.patch
+)
 cp -rp musl-1.2.3/patches $BUILDROOT/sysa/musl-1.2.3
 # Restore musl-1.2.3 tar file preserved before linux deletes distfiles
 (
@@ -120,6 +127,7 @@ cd $BUILDROOT
 patch --no-backup-if-mismatch -p1 < ../../parts.rst.patch
 patch --no-backup-if-mismatch -p1 < ../../DEVEL.md.patch
 patch --no-backup-if-mismatch -p1 < ../../reuse.patch
+cp ../../LICENSES/BSD-3-Clause.txt LICENSES
 )
 
 # DEVELOPMENT
