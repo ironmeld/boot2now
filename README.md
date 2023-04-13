@@ -1,18 +1,16 @@
 # Boot2now
 
-The project adds kernel bootstrapping to live-bootstrap.
+This project has been retired.
 
-The [live-bootstrap](https://github.com/fosslinux/live-bootstrap) project aims to build a modern set of compilers starting from tiny hexadecimal translators, then assemblers, subsets of C, to tcc, to gcc, and then much more. However, live-bootstrap was initially developed with reliance on a preexisting POSIX/Linux kernel. This project fill in this gap by adding bootstrap kernels to the live-bootstrap build process. The initial kernel to run is a 3.5KB primitive Linux clone called [builder-hex0](https://github.com/ironmeld/builder-hex0). This provides a primitive kernel, file system, and shell which is enough to build the [stage0-posix](https://github.com/oriansj/stage0-posix) compilers up to the M2 compiler which is a subset of C. Then the mes C compiler and C library (written in Scheme) builds tcc. Then tcc is used to build the [Fiwix](https://www.fiwix.org/) [kernel](https://github.com/mikaku/Fiwix). This is a much more powerful Linux clone written in C which provides enough functionality to run compilers up to gcc which ultimately builds Linux.
+The project was a staging project to add kernel bootstrapping to live-bootstrap. The code from this project was turned into a [branch](https://github.com/rick-masters/live-bootstrap/tree/kernel-bootstrap-v2) and [Pull Request](https://github.com/fosslinux/live-bootstrap/pull/272) which was integrated into live-bootstrap on April 11, 2023. So now this project is essentially obsolete and is retained only for historical purposes.
 
-The method by which boot2now achieves kernel bootstrapping integration with live-bootstrap is to checkout, patch, and then run live-bootstrap with a new `--kernel-bootstrap` option. (The full live-bootstrap command is `./rootfs.py --qemu --kernel-bootstrap`.)
-
-Ultimately the goal is to commit these modifications directly into the live-bootstrap project. After that, this project will be essentially obsolete and will only be retained for historical purposes.
+The [live-bootstrap](https://github.com/fosslinux/live-bootstrap) project aims to build a modern set of compilers starting from tiny hexadecimal translators, then assemblers, subsets of C, to tcc, to gcc, and then much more. However, live-bootstrap was initially developed with reliance on a preexisting POSIX/Linux kernel. This project fills this gap by adding bootstrap kernels to the live-bootstrap build process. The initial kernel to run is a 3.5KB primitive Linux clone called [builder-hex0](https://github.com/ironmeld/builder-hex0). This provides a primitive kernel, file system, and shell which is enough to build the [stage0-posix](https://github.com/oriansj/stage0-posix) compilers up to the M2 compiler which is a subset of C. Then the mes C compiler and C library (written in Scheme) builds tcc. Then tcc is used to build the [Fiwix](https://www.fiwix.org/) [kernel](https://github.com/mikaku/Fiwix). This is a much more powerful Linux clone written in C which provides enough functionality to run compilers up to gcc which ultimately builds Linux.
 
 This work was development independently from live-boostrap for roughly a year and has a great deal of git history for how the kernel bootstrap was developed. The rest of this README should be read in that historical context. Boot2now was developed as a series of stages to build more and more build tools, with each phase built upon the last phase. However, at the end of this process all phases were merged together and then patched directly into live-bootstrap.
 
 Just typing `make` will only patch and run live-bootstrap. However, you can still build the individual tool stages and the final integration by typing `make all`. See the Makefile for more details.
 
-If you only want to inspect the modifications to live-bootstrap, then do this:
+If you only want to inspect the modifications to live-bootstrap, then do this after clone and submodule update:
 
 ```
 cd live-bootstrap-kernel-bootstrap
